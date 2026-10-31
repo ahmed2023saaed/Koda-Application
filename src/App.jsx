@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+
+import ProductsPage from "./features/products/pages/ProductsPage";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      React App
-    </>
+        <BrowserRouter>
+           <AppRoutes />
+        </BrowserRouter>
+ 
   )
 }
 
