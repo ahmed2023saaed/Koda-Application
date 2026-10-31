@@ -1,23 +1,13 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import Login from '../src/features/auth/pages/LoginPage'
-import Dashboard from '../src/features/dashboard/pages/DashboardPage'
-import ProtectedRoute from '../src/features/auth/components/ProtectedRoute'
+import { AuthProvider } from "@/features/auth/contexts/AuthContext";
+import { Router } from "@/routes";
+import "./App.css";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
-  )
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
