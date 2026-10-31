@@ -1,7 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const ProductsPage = lazy(() =>
-  import("../features/products/pages/ProductsPage")
+  import("../pages/ProductsPage")
 );
 
 export default function AppRoutes() {

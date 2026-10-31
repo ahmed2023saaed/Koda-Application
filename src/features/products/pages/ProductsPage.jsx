@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { getProducts } from "../../../services/productService";
+import { getProducts } from "../services/productService";
 import ProductStats from "../components/ProductStats";
 import { Package, Plus, } from "lucide-react";
 import ProductList from "../components/ProductList";
