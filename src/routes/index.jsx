@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { AdminLayout } from "@/layouts/admin/AdminLayout";
+import  AdminLayout  from "@/layouts/admin/AdminLayout";
 import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 
