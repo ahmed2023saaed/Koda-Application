@@ -1,5 +1,6 @@
 import image11 from "/public/images/image11.jpeg";
 import { FcGoogle } from "react-icons/fc";
+import { ShoppingBag, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from '@/features/auth/contexts/authContext';
 import { useNavigate } from "react-router-dom"
@@ -72,37 +73,38 @@ const handleLogin = async (e) => {
   }
 }
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+    <div className="fixed inset-0 overflow-y-auto bg-[#0b1a2b] flex p-4 lg:p-8 [color-scheme:dark]">
+  <div className="m-auto w-full max-w-md lg:max-w-6xl bg-[#0b1a2b] rounded-3xl border border-white/15 overflow-hidden grid grid-cols-1 lg:grid-cols-2">
 
-        {/* Left Side */}
-        <div className="bg-indigo-600 text-white p-8 md:p-10 flex flex-col justify-center">
+        {/* Left Side (hidden on mobile / tablet) */}
+        <div className="hidden lg:flex flex-col justify-center p-12 text-white bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400">
 
-          <h2 className="text-2xl font-bold mb-8">
-            Koda Store
-          </h2>
+          <div className="flex items-center gap-3 mb-6">
+            <ShoppingBag className="w-9 h-9 text-white" />
+            <h2 className="text-3xl font-bold text-white">Koda Commerce</h2>
+          </div>
 
-          <h1 className="text-3xl font-bold mb-4 leading-tight">
-            Manage Your Business
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            Manage Your Store
             <br />
             Like a Pro
           </h1>
 
-          <p className="text-indigo-100 mb-8 leading-relaxed">
-            Manage your products, orders and customers
-            easily from one place.
+          <p className="text-white/80 text-lg mb-10 leading-relaxed">
+            Control products, orders, users, carts and analytics from
+            a modern dashboard experience.
           </p>
 
           <div className="space-y-4">
-            <p className="bg-white/10 p-3 rounded-lg">
+            <p className="bg-white/15 px-6 py-4 rounded-2xl text-white/90">
               ✓ Product Management
             </p>
 
-            <p className="bg-white/10 p-3 rounded-lg">
+            <p className="bg-white/15 px-6 py-4 rounded-2xl text-white/90">
               ✓ Order Tracking
             </p>
 
-            <p className="bg-white/10 p-3 rounded-lg">
+            <p className="bg-white/15 px-6 py-4 rounded-2xl text-white/90">
               ✓ Customer Insights
             </p>
           </div>
@@ -110,89 +112,95 @@ const handleLogin = async (e) => {
         </div>
 
         {/* Right Side */}
-        <div className="p-8 md:p-4 flex flex-col justify-start">
+        <div className="p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
           <div className="flex justify-center mb-6">
             <img
               src={image11}
               alt="Kode Commerce"
-              className="w-50 h-50 "
+              className="w-44 h-auto"
             />
           </div>
 
-          <h2 className="text-xl font-bold text-gray-800 text-center mb-2">
-            Welcome Back!
+          <h2 className="text-3xl font-bold text-white text-center mb-2">
+            Welcome Back
           </h2>
 
-          <p className="text-gray-500 text-center text-sm mb-5">
-            Sign in to your admin account
+          <p className="text-slate-300 text-center mb-8">
+            Sign in to your admin dashboard
           </p>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-5">
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-white mb-2"
               >
                 Email Address
               </label>
 
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500"
-                value={email}
-                onChange={(e)=>setEmail(e.target.value)}
-              />
-              {fieldErrors.email &&(<p className="text-red-500 text-sm mt-1">{fieldErrors.email}</p>)}
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
+                />
+              </div>
+              {fieldErrors.email &&(<p className="text-red-400 text-sm mt-1">{fieldErrors.email}</p>)}
             </div>
 
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-semibold text-white mb-2"
               >
                 Password
               </label>
 
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-              />
-              {fieldErrors.password &&(<p className="text-red-500 text-sm mt-1">{fieldErrors.password}</p>)}
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
+                />
+              </div>
+              {fieldErrors.password &&(<p className="text-red-400 text-sm mt-1">{fieldErrors.password}</p>)}
             </div>
-            {error && (<p className="text-red-500 text-sm">{error}</p>)}
+            {error && (<p className="text-red-400 text-sm">{error}</p>)}
 
-            
+
              <button
   type="submit"
   disabled={loading}
-className="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-semibold hover:bg-indigo-700 transition cursor-pointer"
+className="w-full bg-gradient-to-r from-sky-500 to-cyan-400 text-white py-3.5 rounded-2xl font-semibold hover:opacity-90 transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
 
 >
   {loading ? "Signing in..." : "Sign In"}
 </button>
-           
+
           </form>
 
-          <div className="flex items-center gap-4 my-4">
-            <div className="flex-1 h-px bg-gray-200"></div>
-            <span className="text-sm text-gray-400">OR</span>
-            <div className="flex-1 h-px bg-gray-200"></div>
+          <div className="flex items-center gap-4 my-6">
+            <div className="flex-1 h-px bg-slate-600/60"></div>
+            <span className="text-sm text-slate-300">OR</span>
+            <div className="flex-1 h-px bg-slate-600/60"></div>
           </div>
           <button
             type="button"
-            className="w-full border border-gray-300 rounded-lg py-2.5 flex items-center justify-center gap-3 text-gray-700 font-medium hover:bg-gray-50 transition cursor-pointer"
+            className="w-full bg-slate-700/40 border border-slate-600/50 rounded-2xl py-3.5 flex items-center justify-center gap-3 text-white font-semibold hover:bg-slate-700/60 transition cursor-pointer"
           >
             <FcGoogle className="text-xl" />
             Continue with Google
           </button>
 
-          <p className="text-xs text-gray-400 text-center mt-5">
+          <p className="text-sm text-slate-400 text-center mt-8">
             Secure Admin Access
           </p>
         </div>
