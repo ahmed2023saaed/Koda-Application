@@ -1,6 +1,39 @@
 import React from 'react';
 import logoImage from '../images/Logo.png';
-export default function Topbar({ isDarkMode, toggleTheme }) {
+
+  
+  export default function Topbar({ isDarkMode, toggleTheme }) {
+  
+    const handleLogout = async () => {
+  try {
+    const response = await fetch(
+      'https://e-commerce-api-3wara.vercel.app/auth/logout',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Logout failed:', data.message);
+    } else {
+      console.log('Logout successful:', data.message);
+    }
+
+  } catch (error) {
+    console.error('Logout API error:', error);
+
+  } finally {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login';
+  }
+};
   return (
     <header className={`${isDarkMode ? 'bg-[#0B0F19] border-gray-800/80 text-white' : 'bg-white border-gray-200 text-gray-800'} border-b h-20 px-8 flex items-center justify-between transition-colors duration-200`}>
       
@@ -25,16 +58,16 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
 
       
       <div className="flex items-center gap-3">
-        {/* زر الإشعارات */}
+       
         <button className={`p-2.5 rounded-xl border cursor-pointer transition-colors relative flex items-center justify-center ${isDarkMode ? 'bg-[#111827] border-gray-800 text-gray-300 hover:bg-gray-800' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor" className="w-5 h-5">
     <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
   </svg>
-  {/* النقطة الحمراء للتنبيه */}
+  
   <span className="absolute top-2 right-2 w-3 h-3 bg-red-500 rounded-full border-2 border-[#111827]"></span>
 </button>
 
-{/* زر الشمس / الوضع الليلي بالـ SVG */}
+
 <button 
   onClick={toggleTheme}
   className={`p-2.5 rounded-xl cursor-pointer border transition-colors flex items-center justify-center ${isDarkMode ? 'bg-[#111827] border-gray-800 text-gray-300 hover:bg-gray-800' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
@@ -64,7 +97,8 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
         </div>
 
         
-        <button className="flex items-center gap-1.5 rounded-lg bg-red-500 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-red-600 cursor-pointer">
+        <button onClick={handleLogout}
+         className="flex items-center gap-1.5 rounded-lg bg-red-500 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-red-600 cursor-pointer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"

@@ -33,9 +33,9 @@ export default function Sidebar({ isDarkMode }) {
         </h2>
       </div>
 
-      {/* Navigation */}
+      
       <nav className="flex-1 px-3.5 pt-3.5 space-y-0.5">
-        {/* Dashboard - Active */}
+        
         <a
           href="#"
           className={`flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-sm font-semibold transition-colors ${
@@ -61,7 +61,7 @@ export default function Sidebar({ isDarkMode }) {
           <span>Dashboard</span>
         </a>
 
-        {/* Users */}
+      
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function Sidebar({ isDarkMode }) {
           <span>Users</span>
         </a>
 
-        {/* Products */}
+        
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ export default function Sidebar({ isDarkMode }) {
           <span>Products</span>
         </a>
 
-        {/* Add Product */}
+       
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ export default function Sidebar({ isDarkMode }) {
           <span className="-translate-x-0.5 relative">Add Product</span>
         </a>
 
-        {/* Orders */}
+       
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,7 @@ export default function Sidebar({ isDarkMode }) {
           <span>Orders</span>
         </a>
 
-        {/* Carts */}
+        
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ export default function Sidebar({ isDarkMode }) {
           <span>Carts</span>
         </a>
 
-        {/* Settings */}
+       
         <a href="#" className={navItemClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ export default function Sidebar({ isDarkMode }) {
         </a>
       </nav>
 
-      {/* LIVE Status */}
+     
      <div className="p-3.5 mt-auto">
   <div className="mr-1 rounded-3xl bg-gradient-to-br from-cyan-400 via-sky-500 to-indigo-600 px-3 py-5 text-white">
           <span className="block text-[11px] tracking-[0.25em] uppercase opacity-90">
