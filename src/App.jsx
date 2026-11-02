@@ -31,7 +31,6 @@ function App() {
   )
 }
 
-export default App
 
 
 import { Router } from "@/routes";
