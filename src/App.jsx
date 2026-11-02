@@ -1,3 +1,4 @@
+
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from '../src/features/auth/pages/LoginPage'
 import Dashboard from '../src/features/dashboard/pages/DashboardPage'
@@ -31,4 +32,14 @@ function App() {
 }
 
 export default App
+
+
+import { Router } from "@/routes";
+import "./App.css";
+
+function App() {
+  return <Router />;
+}
+
+export default App;
 

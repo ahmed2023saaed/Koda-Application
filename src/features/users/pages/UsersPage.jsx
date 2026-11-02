@@ -1,4 +1,5 @@
 
+
 import React, { useState } from "react";
 
 function UsersPage() {
@@ -166,3 +167,13 @@ function UsersPage() {
 }
 
 export default UsersPage;
+
+
+export default function UsersPage() {
+  return (
+    <>
+      Users page
+    </>
+  );
+}
+

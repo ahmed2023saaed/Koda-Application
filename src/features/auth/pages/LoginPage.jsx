@@ -1,7 +1,7 @@
 import image11 from "/public/images/image11.jpeg";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
-import { useAuth } from './authcontext';
+import { useAuth } from '@/features/auth/contexts/authContext';
 import { useNavigate } from "react-router-dom"
 function Login() {
     const [email, setEmail] = useState("");
