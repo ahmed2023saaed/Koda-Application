@@ -1,6 +1,14 @@
 import React, { useState } from "react"; 
 import { Edit2, Trash2, ShieldCheck, Users } from "lucide-react"; 
 import UserForm from "/src/features/users/components/UserForm"; 
+import {
+  getUsers,
+  addUser,
+  updateUser,
+  deleteUser
+} from "/src/api/usersApi";
+
+
 
 export default function UsersPage() { 
   const [users, setUsers] = useState([ 
