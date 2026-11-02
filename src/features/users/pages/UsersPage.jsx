@@ -1,123 +1,175 @@
+
 import React, { useState } from "react";
 import UserForm from "/src/features/users/components/UserForm";
 
+import {
+Edit2,
+Trash2,
+ShieldCheck
+} from "lucide-react";
+
 export default function App() {
-  // قائمة المستخدمين الافتراضية
-  const [users, setUsers] = useState([
-    { id: 1, name: "mostafa_122", email: "mostafa@gmail.com", phone: "0123456789", role: "Customer" },
-    { id: 2, name: "tysileba", email: "xoquxyb@mailinator.com", phone: "9876543210", role: "Admin" },
-  ]);
+const [users, setUsers] = useState([
+{ id: 1, name: "mostafa_122", email: "[mostafa@gmail.com](mailto:mostafa@gmail.com)", phone: "0102345678", role: "customer", verified: "No" },
+{ id: 2, name: "tysileba", email: "[xoquxyb@mailinator.com](mailto:xoquxyb@mailinator.com)", phone: "0114567890", role: "customer", verified: "No" },
+{ id: 3, name: "Customer", email: "[vicyqemuzu@mailinator.com](mailto:vicyqemuzu@mailinator.com)", phone: "", role: "customer", verified: "No" },
+{ id: 4, name: "curuculi", email: "[veleyjzi@mailinator.com](mailto:veleyjzi@mailinator.com)", phone: "0151234567", role: "customer", verified: "No" },
+{ id: 5, name: "ADMIN", email: "[admin@koda.com](mailto:admin@koda.com)", phone: "0120000000", role: "admin", verified: "No" },
+]);
 
-  // حالة لتخزين المستخدم المراد تعديله (إذا كان null يعني أننا في وضع "الإضافة")
-  const [selectedUser, setSelectedUser] = useState(null);
+const [selectedUser, setSelectedUser] = useState(null);
 
-  // دالة الحفظ (تتعامل مع الإضافة والتعديل معاً)
-  const handleSaveUser = (userData) => {
-    if (userData.id) {
-      // وضع التعديل (Edit Mode)
-      setUsers(users.map((u) => (u.id === userData.id ? userData : u)));
-    } else {
-      // وضع الإضافة (Add Mode)
-      const newUser = {
-        ...userData,
-        id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1, // توليد ID تلقائي
-      };
-      setUsers([...users, newUser]);
-    }
-    setSelectedUser(null); // تفريغ الفورم وإعادته لوضع الإضافة بعد الحفظ
-  };
+const handleSaveUser = (userData) => {
+if (userData.id) {
+setUsers((prev) =>
+prev.map((u) => (u.id === userData.id ? userData : u))
+);
+} else {
+const newUser = {
+...userData,
+id: users.length
+? Math.max(...users.map((u) => u.id)) + 1
+: 1,
+};
 
-  // دالة حذف مستخدم
-  const handleDeleteUser = (id) => {
-    setUsers(users.filter((u) => u.id !== id));
-    if (selectedUser?.id === id) setSelectedUser(null);
-  };
-
-  return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-100 p-6 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
-        
-        {/* Header */}
-        <div className="border-b border-slate-800 pb-4">
-          <h1 className="text-2xl font-bold text-white">Koda Dashboard</h1>
-          <p className="text-sm text-slate-400 mt-1">Manage application users, phone directories, and roles.</p>
-        </div>
-
-        {/* تقسيم الشاشة: الفورم على اليسار/اليمين والجدول بجانبه */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          
-          {/* عرض الفورم وتمرير الـ Props له */}
-          <UserForm 
-            selectedUser={selectedUser} 
-            onSave={handleSaveUser} 
-            onCancel={() => setSelectedUser(null)} 
-          />
-
-          {/* جدول عرض المستخدمين */}
-          <div className="bg-[#1e293b] rounded-xl shadow-md border border-slate-800 overflow-hidden lg:col-span-2">
-            <div className="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-              <h2 className="text-lg font-semibold text-white">Users List</h2>
-              {selectedUser && (
-                <button 
-                  onClick={() => setSelectedUser(null)} 
-                  className="text-xs bg-sky-500/10 text-sky-400 px-2 py-1 rounded border border-sky-500/20"
-                >
-                  Switch to Add New User
-                </button>
-              )}
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
-                    <th className="px-6 py-4 font-semibold">User Details</th>
-                    <th className="px-6 py-4 font-semibold">Phone</th>
-                    <th className="px-6 py-4 font-semibold">Role</th>
-                    <th className="px-6 py-4 font-semibold text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60">
-                  {users.map((u) => (
-                    <tr key={u.id} className="hover:bg-[#1e293b]/50 transition">
-                      <td className="px-6 py-4">
-                        <div className="text-sm font-semibold text-slate-200">{u.name}</div>
-                        <div className="text-xs text-slate-400">{u.email}</div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-slate-300">{u.phone || "—"}</td>
-                      <td className="px-6 py-4 text-sm">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${
-                          u.role === "Admin" 
-                            ? "bg-purple-500/10 text-purple-400 border-purple-500/20" 
-                            : "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
-                        }`}>
-                          {u.role}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-right space-x-2">
-                        {/* عند الضغط هنا يتم تمرير بيانات هذا المستخدم للفورم ليدخل في وضع التعديل */}
-                        <button 
-                          onClick={() => setSelectedUser(u)}
-                          className="text-sky-400 hover:text-sky-300 font-medium transition mr-3 text-xs uppercase"
-                        >
-                          Edit
-                        </button>
-                        <button 
-                          onClick={() => handleDeleteUser(u.id)}
-                          className="text-rose-400 hover:text-rose-300 font-medium transition text-xs uppercase"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  );
+```
+  setUsers((prev) => [...prev, newUser]);
 }
+
+setSelectedUser(null);
+```
+
+};
+
+const totalUsers = users.length;
+const admins = users.filter((u) => u.role === "admin").length;
+const customers = users.filter((u) => u.role === "customer").length;
+const verified = users.filter((u) => u.verified === "Yes").length;
+
+return (
+
+  <div className="min-h-screen bg-[#090d16] text-slate-100 p-6">
+
+```
+{/* Statistics */}
+<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+  {[
+    { label: "Total Users", value: totalUsers },
+    { label: "Admins", value: admins },
+    { label: "Customers", value: customers },
+    { label: "Verified", value: verified },
+  ].map((stat) => (
+    <div
+      key={stat.label}
+      className="bg-[#0b0f19] p-4 rounded-xl border border-slate-900/60"
+    >
+      <p className="text-xs text-slate-500 uppercase">
+        {stat.label}
+      </p>
+      <h3 className="text-2xl font-black text-white mt-2">
+        {stat.value}
+      </h3>
+    </div>
+  ))}
+</div>
+
+{/* User Form and Table */}
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+
+  <UserForm
+    selectedUser={selectedUser}
+    onSave={handleSaveUser}
+    onCancel={() => setSelectedUser(null)}
+  />
+
+  {/* Users Table */}
+  <div className="bg-[#0b0f19] border border-slate-900/60 rounded-xl overflow-hidden lg:col-span-2">
+
+    <div className="overflow-x-auto">
+      <table className="w-full text-left border-collapse">
+
+        <thead>
+          <tr className="border-b border-slate-900/80 text-slate-500 text-xs">
+            <th className="px-6 py-4">User</th>
+            <th className="px-6 py-4">Role</th>
+            <th className="px-6 py-4">Verified</th>
+            <th className="px-6 py-4 text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody className="divide-y divide-slate-900/40">
+          {users.map((u) => (
+            <tr key={u.id} className="hover:bg-[#111827]/40">
+
+              <td className="px-6 py-4">
+                <div className="text-sm font-semibold">
+                  {u.name}
+                </div>
+                <div className="text-xs text-slate-500">
+                  {u.email}
+                </div>
+              </td>
+
+              <td className="px-6 py-4">{u.role}</td>
+
+              <td className="px-6 py-4">
+                {u.verified === "Yes" ? "✓ Yes" : "✕ No"}
+              </td>
+
+              <td className="px-6 py-4">
+                <div className="flex justify-center gap-2">
+
+                  <button
+                    onClick={() => setSelectedUser(u)}
+                    className="p-2 bg-blue-600 rounded-md"
+                  >
+                    <Edit2 size={14} />
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      setUsers((prev) =>
+                        prev.map((user) =>
+                          user.id === u.id
+                            ? {
+                                ...user,
+                                verified: user.verified === "Yes" ? "No" : "Yes",
+                              }
+                            : user
+                        )
+                      )
+                    }
+                    className="p-2 bg-emerald-600 rounded-md"
+                  >
+                    <ShieldCheck size={14} />
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      setUsers((prev) =>
+                        prev.filter((user) => user.id !== u.id)
+                      )
+                    }
+                    className="p-2 bg-rose-600 rounded-md"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+);
+}
+}
+
+
