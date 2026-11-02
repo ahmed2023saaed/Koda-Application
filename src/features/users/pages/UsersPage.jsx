@@ -1,94 +1,113 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import UserForm from "/src/features/users/components/UserForm";
 
-export default function UsersManagement() {
+export default function App() {
+  // قائمة المستخدمين الافتراضية
   const [users, setUsers] = useState([
-    { id: 1, name: 'Ahmed Mohamed', email: 'ahmed@gmail.com', role: 'Admin' },
-    { id: 2, name: 'Sara Ali', email: 'sara@gmail.com', role: 'Customer' },
+    { id: 1, name: "mostafa_122", email: "mostafa@gmail.com", phone: "0123456789", role: "Customer" },
+    { id: 2, name: "tysileba", email: "xoquxyb@mailinator.com", phone: "9876543210", role: "Admin" },
   ]);
 
+  // حالة لتخزين المستخدم المراد تعديله (إذا كان null يعني أننا في وضع "الإضافة")
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  // دالة الحفظ (تتعامل مع الإضافة والتعديل معاً)
+  const handleSaveUser = (userData) => {
+    if (userData.id) {
+      // وضع التعديل (Edit Mode)
+      setUsers(users.map((u) => (u.id === userData.id ? userData : u)));
+    } else {
+      // وضع الإضافة (Add Mode)
+      const newUser = {
+        ...userData,
+        id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1, // توليد ID تلقائي
+      };
+      setUsers([...users, newUser]);
+    }
+    setSelectedUser(null); // تفريغ الفورم وإعادته لوضع الإضافة بعد الحفظ
+  };
+
+  // دالة حذف مستخدم
+  const handleDeleteUser = (id) => {
+    setUsers(users.filter((u) => u.id !== id));
+    if (selectedUser?.id === id) setSelectedUser(null);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6 font-sans">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#0f172a] text-slate-100 p-6 font-sans">
+      <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Header */}
-        <div className="border-b border-gray-200 pb-4">
-          <h1 className="text-2xl font-bold text-gray-800">Users Management</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage your application users and their roles.</p>
+        <div className="border-b border-slate-800 pb-4">
+          <h1 className="text-2xl font-bold text-white">Koda Dashboard</h1>
+          <p className="text-sm text-slate-400 mt-1">Manage application users, phone directories, and roles.</p>
         </div>
 
+        {/* تقسيم الشاشة: الفورم على اليسار/اليمين والجدول بجانبه */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           
-          {/* Add New User Form */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-1">
-            <h2 className="text-lg font-semibold text-gray-700 mb-4">Add New User</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-1">Name</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter Name" 
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-1">Email</label>
-                <input 
-                  type="email" 
-                  placeholder="Enter Email" 
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                />
-              </div>
+          {/* عرض الفورم وتمرير الـ Props له */}
+          <UserForm 
+            selectedUser={selectedUser} 
+            onSave={handleSaveUser} 
+            onCancel={() => setSelectedUser(null)} 
+          />
 
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-1">Role</label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                  <option value="Customer">Customer</option>
-                  <option value="Admin">Admin</option>
-                </select>
-              </div>
-
-              <button 
-                type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition duration-200 text-sm shadow-sm"
-              >
-                Add User
-              </button>
-            </form>
-          </div>
-
-          {/* Users List Table */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden lg:col-span-2">
-            <div className="px-6 py-4 border-b border-gray-100">
-              <h2 className="text-lg font-semibold text-gray-700">Users List</h2>
+          {/* جدول عرض المستخدمين */}
+          <div className="bg-[#1e293b] rounded-xl shadow-md border border-slate-800 overflow-hidden lg:col-span-2">
+            <div className="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+              <h2 className="text-lg font-semibold text-white">Users List</h2>
+              {selectedUser && (
+                <button 
+                  onClick={() => setSelectedUser(null)} 
+                  className="text-xs bg-sky-500/10 text-sky-400 px-2 py-1 rounded border border-sky-500/20"
+                >
+                  Switch to Add New User
+                </button>
+              )}
             </div>
+            
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-100">
-                    <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">ID</th>
-                    <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Name</th>
-                    <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Email</th>
-                    <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">Role</th>
-                    <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Actions</th>
+                  <tr className="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                    <th className="px-6 py-4 font-semibold">User Details</th>
+                    <th className="px-6 py-4 font-semibold">Phone</th>
+                    <th className="px-6 py-4 font-semibold">Role</th>
+                    <th className="px-6 py-4 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition duration-150">
-                      <td className="px-6 py-4 text-sm text-gray-600 font-medium">{user.id}</td>
-                      <td className="px-6 py-4 text-sm text-gray-800 font-semibold">{user.name}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
+                <tbody className="divide-y divide-slate-800/60">
+                  {users.map((u) => (
+                    <tr key={u.id} className="hover:bg-[#1e293b]/50 transition">
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-semibold text-slate-200">{u.name}</div>
+                        <div className="text-xs text-slate-400">{u.email}</div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-slate-300">{u.phone || "—"}</td>
                       <td className="px-6 py-4 text-sm">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          user.role === 'Admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+                          u.role === "Admin" 
+                            ? "bg-purple-500/10 text-purple-400 border-purple-500/20" 
+                            : "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
                         }`}>
-                          {user.role}
+                          {u.role}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-right space-x-3">
-                        <button className="text-blue-600 hover:text-blue-800 font-medium transition mr-3">Edit</button>
-                        <button className="text-red-600 hover:text-red-800 font-medium transition">Delete</button>
+                      <td className="px-6 py-4 text-sm text-right space-x-2">
+                        {/* عند الضغط هنا يتم تمرير بيانات هذا المستخدم للفورم ليدخل في وضع التعديل */}
+                        <button 
+                          onClick={() => setSelectedUser(u)}
+                          className="text-sky-400 hover:text-sky-300 font-medium transition mr-3 text-xs uppercase"
+                        >
+                          Edit
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteUser(u.id)}
+                          className="text-rose-400 hover:text-rose-300 font-medium transition text-xs uppercase"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
