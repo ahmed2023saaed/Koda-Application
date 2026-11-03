@@ -1,6 +1,22 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/features/auth/contexts/authContext";
+import api from "@/api/axios";
 import logoImage from '@/images/Logo.png';
 export default function Topbar({ isDarkMode, toggleTheme }) {
+  const { logout } = useAuth();
+const navigate = useNavigate();
+
+const handleLogout = async () => {
+  try {
+    await api.post("/auth/logout");
+  } catch (err) {
+    console.error(err);
+  } finally {
+    logout();
+    navigate("/login", { replace: true });
+  }
+};
   return (
     <header className={`${isDarkMode ? 'bg-[#0B0F19] border-gray-800/80 text-white' : 'bg-white border-gray-200 text-gray-800'} border-b h-20 px-8 flex items-center justify-between transition-colors duration-200`}>
       
@@ -64,7 +80,7 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
         </div>
 
         
-        <button className="flex items-center gap-1.5 rounded-lg bg-red-500 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-red-600 cursor-pointer">
+        <button onClick={handleLogout} className="flex items-center gap-1.5 rounded-lg bg-red-500 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-red-600 cursor-pointer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
