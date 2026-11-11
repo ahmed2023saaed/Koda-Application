@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/contexts/authContext";
 import api from "@/api/axios";
 import logoImage from '@/images/Logo.png';
-export default function Topbar({ isDarkMode, toggleTheme }) {
+import { useTheme } from '../../contexts/themeContext';
+export default function Topbar() {
   const { logout } = useAuth();
 const navigate = useNavigate();
+  const { isDarkMode, toggleTheme } = useTheme(); 
 
 const handleLogout = async () => {
   try {
