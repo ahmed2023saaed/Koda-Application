@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../../contexts/themeContext";
 
-export default function Sidebar({ isDarkMode }) {
+export default function Sidebar() {
+  const { isDarkMode } = useTheme();
   const navItems = [
     {
       to: "/dashboard",
