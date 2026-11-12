@@ -1,6 +1,7 @@
 
 
 import { useEffect, useState } from "react";
+import { Star } from "lucide-react";
 
 export default function ProductImageCarousel({ product }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +20,7 @@ export default function ProductImageCarousel({ product }) {
 
     // Clean up the timer when the component is removed.
     return () => clearInterval(intervalId);
-  }, [currentIndex,images.length]);
+  }, [currentIndex, images.length]);
 
   const showPrevious = () => {
     setCurrentIndex((previousIndex) =>
@@ -46,21 +47,23 @@ export default function ProductImageCarousel({ product }) {
   return (
     <div className="group relative mb-4 overflow-hidden rounded-lg">
       {/* Stock status badge */}
-<span
-  className={`absolute right-3 bottom-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${
-    Number(product.stock) > 0
-      ? "bg-green-100 text-green-700"
-      : "bg-red-100 text-red-700"
-  }`}
->
-  {Number(product.stock) > 0 ? "In Stock" : "Out of Stock"}
-</span>
-{/* Featured status badge */}
-{product.featured === true && (
-  <span className="absolute left-3 top-3 z-10 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-700">
-    Featured
-  </span>
-)}
+      <span
+        className={`absolute right-3 bottom-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${Number(product.stock) > 0
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-700"
+          }`}
+      >
+        {Number(product.stock) > 0
+          ? `In Stock (${Number(product.stock)})`
+          : "Out of Stock"}
+      </span>
+      {/* Featured status badge */}
+      {product.featured === true && (
+        <span className="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-700">
+          <Star size={12} fill="currentColor" />
+          Featured
+        </span>
+      )}
       {/* Sliding image track */}
       <div
         className="flex transition-transform duration-500 ease-in-out motion-reduce:transition-none"
@@ -71,18 +74,17 @@ export default function ProductImageCarousel({ product }) {
         {images.map((image, index) => (
           <div
             key={image.public_id || image.url || index}
-            className="w-full flex-shrink-0"
+            className="w-full flex-shrink-0 overflow-hidden"
           >
-            {index === currentIndex && (
-                <img
+            <img
               src={image.url}
               alt={`${product.name || "Product"} - image ${index + 1}`}
-               loading="lazy"
-               decoding="async"
+              loading="eager"
+              decoding="async"
               className="h-56 w-full bg-gray-100 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
-            )}
-          
+
+
           </div>
         ))}
       </div>
