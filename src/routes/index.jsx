@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import  AdminLayout  from "@/layouts/admin/AdminLayout";
+import AdminLayout from "@/layouts/admin/AdminLayout";
 import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 
@@ -16,6 +16,8 @@ import {
   UsersPage,
   ProductsPage,
   AddProductPage,
+  EditProductPage,
+  ViewProductPage,
   OrdersPage,
   CartsPage,
   SettingsPage,
@@ -81,6 +83,23 @@ const router = createBrowserRouter([
               </Suspense>
             ),
           },
+          // {
+          //   path: "/products",
+          //   element: (
+          //     <Suspense fallback={pageFallback("Loading products...")}>
+          //       <ProductsPage />
+          //     </Suspense>
+          //   ),
+          // },
+          // {
+          //   path: "/products/new",
+          //   element: (
+          //     <Suspense fallback={pageFallback("Loading product form...")}>
+          //       <AddProductPage />
+          //     </Suspense>
+          //   ),
+          // },
+
           {
             path: "/products",
             element: (
@@ -90,13 +109,35 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "/products/new",
+            path: "/products/add",
             element: (
               <Suspense fallback={pageFallback("Loading product form...")}>
                 <AddProductPage />
               </Suspense>
             ),
           },
+          {
+            path: "/products/edit/:id",
+            element: (
+              <Suspense fallback={pageFallback("Loading product details...")}>
+                <EditProductPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/products/view/:id",
+            element: (
+              <Suspense fallback={pageFallback("Loading product details...")}>
+                <ViewProductPage />
+              </Suspense>
+            ),
+          },
+          // Keep the old Add Product URL working
+          {
+            path: "/products/new",
+            element: <Navigate to="/products/add" replace />,
+          },
+
           {
             path: "/orders",
             element: (

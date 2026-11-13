@@ -31,21 +31,53 @@
 
 
 
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
+// import Sidebar from "./Sidebar";
+// import Topbar from "./Navbar";
+
+// export function AdminLayout() {
+//   return (
+//     <div className="flex h-screen overflow-hidden bg-background">
+//       {/* Sidebar */}
+//       <Sidebar />
+
+//       {/* Main area: Navbar on top, scrollable page content below */}
+//       <div className="flex flex-1 flex-col overflow-hidden">
+//         <Topbar />
+//         <main className="flex-1 overflow-y-auto p-4 md:p-6">
+//           {/* ← THIS is what was missing. Child routes render here. */}
+//           <Outlet />
+//         </main>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default AdminLayout;
+
+
+
+import { useTheme } from "@/contexts/themeContext";
 import Sidebar from "./Sidebar";
 import Topbar from "./Navbar";
+import { Outlet } from "react-router-dom";
 
 export function AdminLayout() {
+  const { isDarkMode, toggleTheme } = useTheme();
+
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar isDarkMode={isDarkMode} />
 
-      {/* Main area: Navbar on top, scrollable page content below */}
+      {/* Main area */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Topbar />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">
-          {/* ← THIS is what was missing. Child routes render here. */}
+        <Topbar
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
+        />
+
+        <main className="flex-1 overflow-y-auto bg-background p-4 md:p-6">
           <Outlet />
         </main>
       </div>
