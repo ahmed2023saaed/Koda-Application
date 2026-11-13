@@ -1,7 +1,9 @@
-import React from "react";
+// import React from "react";
 import { NavLink } from "react-router-dom";
+// import { useTheme } from "../../contexts/themeContext";
 
 export default function Sidebar({ isDarkMode }) {
+  // const { isDarkMode } = useTheme();
   const navItems = [
     {
       to: "/dashboard",
@@ -39,7 +41,7 @@ export default function Sidebar({ isDarkMode }) {
       ),
     },
     {
-      to: "/products/new",
+      to: "/products/add",
       label: "Add Product",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
@@ -113,6 +115,7 @@ export default function Sidebar({ isDarkMode }) {
           <NavLink
             key={to}
             to={to}
+            end={to === "/products"}
             className={({ isActive }) =>
               `${baseClass} ${
                 isActive

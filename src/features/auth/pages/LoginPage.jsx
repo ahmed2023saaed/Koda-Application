@@ -4,74 +4,113 @@ import { ShoppingBag, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from '@/features/auth/contexts/authContext';
 import { useNavigate } from "react-router-dom"
+import api from "@/api/axios";
 function Login() {
-    const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [error, setError] = useState("");
-const [loading, setLoading] = useState(false);
-const [fieldErrors,setFieldErrors] = useState({});
-const {login} = useAuth();
-const navigate = useNavigate();
-const validate = () => {
-  const errors = {};
-  if (!email.trim()) {
-    errors.email = "Email is required";
-  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    errors.email = "Enter a valid email";
-  }
-  if (!password) {
-    errors.password = "Password is required";
-  } else if (password.length < 6) {
-    errors.password = "Password must be at least 6 characters";
-  }
-  setFieldErrors(errors);
-  return Object.keys(errors).length === 0;
-};
-
-
-const handleLogin = async (e) => {
-  e.preventDefault();
- if (!validate()) return;
-  setError("");
-  setLoading(true);
-
-  try {
-    const response = await fetch(
-      '/api/auth/login',
-      {
-        method: "POST",
-        credentials:"include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(data.message || "Login failed");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const validate = () => {
+    const errors = {};
+    if (!email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      errors.email = "Enter a valid email";
     }
-   if (data.user?.role !== "admin") {
-  throw new Error("Access denied: admin only");
-}
-    // localStorage.setItem("token", data.token);
-    login(data.token , data.user)
-    navigate("/Dashboard")
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
-    console.log("Login successful:", data.user);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await api.post("/auth/login", {
+        email: email.trim(),
+        password,
+      });
+
+      const data = response.data;
+
+      if (!data.success || !data.token || !data.user) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      login(data.token, data.user);
+
+      navigate("/dashboard", { replace: true });
+
+      console.log("Login successful:", data.user);
+
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        err.message ||
+        "Something went wrong"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  } catch (err) {
-    setError(err.message || "Something went wrong");
-  } finally {
-    setLoading(false);
-  }
-}
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   if (!validate()) return;
+  //   setError("");
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await fetch(
+  //       '/api/auth/login',
+  //       {
+  //         method: "POST",
+  //         credentials: "include",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           email,
+  //           password,
+  //         }),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (!response.ok || !data.success) {
+  //       throw new Error(data.message || "Login failed");
+  //     }
+  //     // if (data.user?.role !== "admin") {
+  //     //   throw new Error("Access denied: admin only");
+  //     // }
+  //     // localStorage.setItem("token", data.token);
+  //     login(data.token, data.user)
+  //     navigate("/Dashboard")
+
+  //     console.log("Login successful:", data.user);
+
+
+  //   } catch (err) {
+  //     setError(err.message || "Something went wrong");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
   return (
     <div className="fixed inset-0 overflow-y-auto bg-[#0a1628] flex p-4 lg:p-8 [color-scheme:dark]">
   <div className="m-auto w-full max-w-md lg:max-w-6xl bg-[#0f1f3a] rounded-3xl border border-white/15 overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl shadow-blue-900/40">
@@ -146,10 +185,10 @@ const handleLogin = async (e) => {
                   placeholder="Enter your email"
                   className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-blue-500 transition"
                   value={email}
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              {fieldErrors.email &&(<p className="text-red-400 text-sm mt-1">{fieldErrors.email}</p>)}
+              {fieldErrors.email && (<p className="text-red-400 text-sm mt-1">{fieldErrors.email}</p>)}
             </div>
 
             <div>
@@ -168,10 +207,10 @@ const handleLogin = async (e) => {
                   placeholder="Enter your password"
                   className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-blue-500 transition"
                   value={password}
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {fieldErrors.password &&(<p className="text-red-400 text-sm mt-1">{fieldErrors.password}</p>)}
+              {fieldErrors.password && (<p className="text-red-400 text-sm mt-1">{fieldErrors.password}</p>)}
             </div>
             {error && (<p className="text-red-400 text-sm">{error}</p>)}
 
@@ -181,9 +220,9 @@ const handleLogin = async (e) => {
   disabled={loading}
 className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3.5 rounded-2xl font-semibold hover:opacity-90 transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
 
->
-  {loading ? "Signing in..." : "Sign In"}
-</button>
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
 
           </form>
 
@@ -201,7 +240,7 @@ className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3.5 r
           </button>
 
           <p className="text-sm text-slate-400 text-center mt-8">
-            Secure Admin Access
+            Secure Account Access
           </p>
         </div>
 

@@ -35,11 +35,38 @@
 
 
 
+// import { Router } from "@/routes";
+// import "./App.css";
+
+// function App() {
+//   return <Router />;
+// }
+
+// export default App;
+
+
 import { Router } from "@/routes";
+import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <Router />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+    </>
+  );
 }
 
 export default App;
