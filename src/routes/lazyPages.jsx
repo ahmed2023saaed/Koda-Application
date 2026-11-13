@@ -19,6 +19,17 @@ export const ProductsPage = React.lazy(() =>
 export const AddProductPage = React.lazy(() =>
   import("@/features/products/pages/AddProductPage").then((m) => ({ default: m.default })),
 );
+export const EditProductPage = React.lazy(() =>
+  import("@/features/products/pages/EditProductPage").then(
+    (m) => ({ default: m.default })
+  )
+);
+
+export const ViewProductPage = React.lazy(() =>
+  import("@/features/products/pages/ViewProductPage").then(
+    (m) => ({ default: m.default })
+  )
+);
 export const OrdersPage = React.lazy(() =>
   import("@/features/orders/pages/OrdersPage").then((m) => ({ default: m.default })),
 );

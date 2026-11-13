@@ -20,13 +20,23 @@ export default defineConfig({
     },
   },
 
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://e-commerce-api-3wara.vercel.app',
+  //       changeOrigin: true,
+  //       secure: false,
+  //       rewrite: (path) => path.replace(/^\/api/, ''),
+  //     },
+  //   },
+  // },
   server: {
     proxy: {
-      '/api': {
-        target: 'https://e-commerce-api-3wara.vercel.app',
+      "/api": {
+        target: "https://e-commerce-api-3wara.vercel.app",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
