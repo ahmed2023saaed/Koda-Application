@@ -98,28 +98,35 @@ export default function AddProductPage() {
     };
 
     return (
-        <div className="mx-auto max-w-6xl space-y-6">
-            <ProductPageHeader />
+        <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
 
-            {error && (
-                <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                    {error}
+            {/* Keep the content centered and limited in width */}
+            <div className="mx-auto max-w-6xl space-y-6">
+                <ProductPageHeader />
+
+                {error && (
+                    <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                        {error}
+                    </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+                    <ProductGallery
+                        images={images}
+                        onImageUpload={handleImageUpload}
+                        onRemoveImage={handleRemoveImage}
+                    />
+
+                    <ProductForm
+                        onSubmit={handleCreateProduct}
+                        isSubmitting={isSubmitting}
+                        submitLabel={isSubmitting ? "Creating..." : "Create Product"}
+                    />
                 </div>
-            )}
-
-            <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-                <ProductGallery
-                    images={images}
-                    onImageUpload={handleImageUpload}
-                    onRemoveImage={handleRemoveImage}
-                />
-
-                <ProductForm
-                    onSubmit={handleCreateProduct}
-                    isSubmitting={isSubmitting}
-                    submitLabel={isSubmitting ? "Creating..." : "Create Product"}
-                />
             </div>
         </div>
     );
+
+
+
 }
