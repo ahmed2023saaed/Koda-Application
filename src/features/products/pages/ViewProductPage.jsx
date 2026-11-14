@@ -35,30 +35,46 @@ export default function ViewProductPage() {
         fetchProduct();
     }, [id]);
 
+
     if (isLoading) {
         return (
-            <div className="space-y-6">
-                <BrandLoader message="Loading Product..." />
-                <ProductDetailsSkeleton />
+            <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
+                <div className="mx-auto max-w-6xl space-y-6">
+                    <BrandLoader message="Loading Product..." />
+                    <ProductDetailsSkeleton />
+                </div>
             </div>
         );
     }
 
+
     if (error || !product) {
         return (
-            <p className="p-6 text-red-600">
-                {error || "Product not found."}
-            </p>
+            <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
+                <div className="mx-auto max-w-6xl">
+                    <p className="p-6 text-red-600 dark:text-red-400">
+                        {error || "Product not found."}
+                    </p>
+                </div>
+            </div>
         );
     }
 
     return (
-        <div className="space-y-6">
-            <ProductDetailsHeader productName={product.name} />
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <ProductDetailsGallery product={product} />
-                <ProductDetailsInfo product={product} />
+        <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
+
+            <div className="mx-auto max-w-6xl space-y-6">
+
+                <ProductDetailsHeader productName={product.name} />
+
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <ProductDetailsGallery product={product} />
+                    <ProductDetailsInfo product={product} />
+                </div>
+
             </div>
         </div>
     );
+
+
 }

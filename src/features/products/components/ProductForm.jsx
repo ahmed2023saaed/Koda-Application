@@ -1,6 +1,9 @@
+
+
 import { useState } from "react";
 import { Layers, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
+
 export default function ProductForm({
     initialValues = {},
     submitLabel = "Create Product",
@@ -30,6 +33,7 @@ export default function ProductForm({
             prevTags.filter((tag) => tag !== tagToRemove)
         );
     };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -43,6 +47,7 @@ export default function ProductForm({
             isActive,
         });
     };
+
     const [isFeatured, setIsFeatured] = useState(
         initialValues.featured ?? false
     );
@@ -50,18 +55,20 @@ export default function ProductForm({
     const [isActive, setIsActive] = useState(
         initialValues.isActive ?? true
     );
+
     return (
         <form
             id={formId}
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+            className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900"
         >
             <div className={compact ? "space-y-3" : "space-y-5"}>
+
                 {/* Product Name */}
                 <div>
                     <label
                         htmlFor="name"
-                        className="mb-2 block text-sm font-medium text-gray-700"
+                        className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                     >
                         Product Name <span className="text-red-500">*</span>
                     </label>
@@ -73,7 +80,7 @@ export default function ProductForm({
                         required
                         defaultValue={initialValues.name ?? ""}
                         placeholder="Enter product name"
-                        className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                        className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                     />
                 </div>
 
@@ -81,7 +88,7 @@ export default function ProductForm({
                 <div>
                     <label
                         htmlFor="shortDescription"
-                        className="mb-2 block text-sm font-medium text-gray-700"
+                        className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                     >
                         Short Description <span className="text-red-500">*</span>
                     </label>
@@ -93,7 +100,7 @@ export default function ProductForm({
                         rows={3}
                         defaultValue={initialValues.shortDescription ?? ""}
                         placeholder="Write a brief product summary..."
-                        className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                        className="w-full resize-none rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                     />
                 </div>
 
@@ -101,7 +108,7 @@ export default function ProductForm({
                 <div>
                     <label
                         htmlFor="description"
-                        className="mb-2 block text-sm font-medium text-gray-700"
+                        className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                     >
                         Full Description <span className="text-red-500">*</span>
                     </label>
@@ -113,7 +120,7 @@ export default function ProductForm({
                         rows={6}
                         defaultValue={initialValues.description ?? ""}
                         placeholder="Write the complete product description..."
-                        className="w-full resize-y rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                        className="w-full resize-y rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                     />
                 </div>
 
@@ -122,7 +129,7 @@ export default function ProductForm({
                     <div>
                         <label
                             htmlFor="price"
-                            className="mb-2 block text-sm font-medium text-gray-700"
+                            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
                             Price <span className="text-red-500">*</span>
                         </label>
@@ -136,14 +143,14 @@ export default function ProductForm({
                             step="0.01"
                             defaultValue={initialValues.price ?? ""}
                             placeholder="0.00"
-                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
                     </div>
 
                     <div>
                         <label
                             htmlFor="discountPrice"
-                            className="mb-2 block text-sm font-medium text-gray-700"
+                            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
                             Discount Price
                         </label>
@@ -156,7 +163,7 @@ export default function ProductForm({
                             step="0.01"
                             defaultValue={initialValues.discountPrice ?? ""}
                             placeholder="0.00"
-                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
                     </div>
                 </div>
@@ -166,7 +173,7 @@ export default function ProductForm({
                     <div>
                         <label
                             htmlFor="stock"
-                            className="mb-2 block text-sm font-medium text-gray-700"
+                            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
                             Stock <span className="text-red-500">*</span>
                         </label>
@@ -180,14 +187,14 @@ export default function ProductForm({
                             step="1"
                             defaultValue={initialValues.stock ?? ""}
                             placeholder="Enter available quantity"
-                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
                     </div>
 
                     <div>
                         <label
                             htmlFor="sku"
-                            className="mb-2 block text-sm font-medium text-gray-700"
+                            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
                             SKU
                         </label>
@@ -198,20 +205,20 @@ export default function ProductForm({
                             type="text"
                             defaultValue={initialValues.sku ?? ""}
                             placeholder="e.g. WH-001"
-                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
                     </div>
                 </div>
 
                 {/* Category and Subcategory */}
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
                     {/* Category */}
                     <div>
                         <label
                             htmlFor="category"
-                            className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-700"
+                            className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
-
                             Category <span className="text-red-500">*</span>
                         </label>
 
@@ -220,7 +227,7 @@ export default function ProductForm({
                             name="category"
                             defaultValue={initialValues.category ?? ""}
                             required
-                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         >
                             <option value="">Select category</option>
                             <option value="electronics">Electronics</option>
@@ -236,7 +243,7 @@ export default function ProductForm({
                     <div>
                         <label
                             htmlFor="subcategory"
-                            className="mb-2 block text-sm font-medium text-gray-700"
+                            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
                             Subcategory
                         </label>
@@ -247,7 +254,7 @@ export default function ProductForm({
                             type="text"
                             defaultValue={initialValues.subcategory ?? ""}
                             placeholder="Enter subcategory"
-                            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
                     </div>
                 </div>
@@ -256,7 +263,7 @@ export default function ProductForm({
                 <div>
                     <label
                         htmlFor="brand"
-                        className="mb-2 block text-sm font-medium text-gray-700"
+                        className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                     >
                         Brand
                     </label>
@@ -267,16 +274,15 @@ export default function ProductForm({
                         type="text"
                         defaultValue={initialValues.brand ?? ""}
                         placeholder="Enter brand name"
-                        className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                        className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                     />
                 </div>
 
-
                 {/* Tags */}
-                <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-4">
+                <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-4 dark:border-blue-900/60 dark:bg-blue-950/30">
                     <label
                         htmlFor="tags"
-                        className="mb-2 block text-sm font-medium text-gray-700"
+                        className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200"
                     >
                         Tags
                     </label>
@@ -295,7 +301,7 @@ export default function ProductForm({
                                 }
                             }}
                             placeholder="Enter a tag..."
-                            className="min-w-0 flex-1 rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                            className="min-w-0 flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/20"
                         />
 
                         <button
@@ -314,14 +320,14 @@ export default function ProductForm({
                             {tags.map((tag) => (
                                 <div
                                     key={tag}
-                                    className="flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-2 text-sm text-blue-700"
+                                    className="flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-2 text-sm text-blue-700 dark:border-blue-900/70 dark:bg-blue-950/50 dark:text-blue-300"
                                 >
                                     <span>#{tag}</span>
 
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveTag(tag)}
-                                        className="text-blue-500 transition hover:text-red-600"
+                                        className="text-blue-500 transition hover:text-red-600 dark:text-blue-400 dark:hover:text-red-400"
                                         aria-label={`Remove ${tag}`}
                                     >
                                         <X size={15} />
@@ -332,12 +338,11 @@ export default function ProductForm({
                     )}
                 </div>
 
-
                 {/* Product Settings */}
                 <div className="grid grid-cols-2 gap-5">
 
                     {/* Featured Checkbox */}
-                    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800">
                         <input
                             type="checkbox"
                             name="featured"
@@ -346,13 +351,13 @@ export default function ProductForm({
                             className="h-5 w-5 cursor-pointer accent-blue-600"
                         />
 
-                        <span className="text-sm font-medium text-gray-800">
+                        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
                             Featured Product
                         </span>
                     </label>
 
                     {/* Active Checkbox */}
-                    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800">
                         <input
                             type="checkbox"
                             name="isActive"
@@ -361,21 +366,22 @@ export default function ProductForm({
                             className="h-5 w-5 cursor-pointer accent-blue-600"
                         />
 
-                        <span className="text-sm font-medium text-gray-800">
+                        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
                             Active
                         </span>
                     </label>
 
                 </div>
+
                 {/* Divider and Action Buttons */}
                 {showActions && (
-                    <div className="border-t border-gray-200 pt-6">
+                    <div className="border-t border-gray-200 pt-6 dark:border-slate-700">
                         <div className="flex flex-col-reverse justify-end gap-3 sm:flex-row">
 
                             {/* Cancel Button */}
                             <Link
                                 to="/products"
-                                className="rounded-xl border border-gray-300 bg-white px-6 py-3 text-center text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
+                                className="rounded-xl border border-gray-300 bg-white px-6 py-3 text-center text-sm font-semibold text-gray-700 transition hover:bg-gray-50 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-200 dark:hover:bg-slate-700"
                             >
                                 Cancel
                             </Link>
@@ -384,7 +390,7 @@ export default function ProductForm({
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                                className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-60"
                             >
                                 {submitLabel}
                             </button>
@@ -393,11 +399,8 @@ export default function ProductForm({
                     </div>
                 )}
 
-
-
             </div>
-
-
         </form>
     );
 }
+
