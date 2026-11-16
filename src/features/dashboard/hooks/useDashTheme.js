@@ -1,10 +1,10 @@
 import { useTheme } from "../../../contexts/themeContext";
 
 const DARK = {
-  panel: "border-slate-800 bg-slate-950",
-  stat: "border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 shadow-xl shadow-black/25",
-  row: "border-slate-800 bg-slate-950 hover:border-slate-700",
-  imgBox: "bg-slate-900",
+panel: "border-slate-800 bg-slate-900",
+stat: "border-slate-800 bg-slate-900 shadow-xl shadow-black/30",
+row: "border-slate-800 bg-slate-950/80 hover:border-slate-700",
+imgBox: "bg-slate-900",
   title: "text-slate-50",
   strong: "text-slate-100",
   muted: "text-slate-400",
@@ -34,10 +34,10 @@ const DARK = {
 };
 
 const LIGHT = {
-  panel: "border-slate-200 bg-white shadow-sm",
-  stat: "border-slate-200 bg-white shadow-md shadow-slate-200/70",
-  row: "border-slate-200 bg-slate-50 hover:border-slate-300",
-  imgBox: "bg-slate-100",
+panel: "border-slate-200/70 bg-white shadow-sm",
+stat: "border-slate-200/70 bg-white shadow-md shadow-slate-200/70",
+row: "border-slate-200 bg-slate-50 hover:border-slate-300",
+imgBox: "bg-slate-100",
   title: "text-slate-900",
   strong: "text-slate-800",
   muted: "text-slate-500",

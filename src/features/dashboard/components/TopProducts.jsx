@@ -13,7 +13,7 @@ function TopProducts({ products }) {
         {products.map((p) => (
           <div
             key={p.id}
-            className={`flex items-center gap-3.5 rounded-2xl border px-4 py-3.5 transition hover:-translate-y-0.5 ${th.row}`}
+            className={`flex items-center gap-4 rounded-3xl border p-4 transition hover:-translate-y-0.5 ${th.row}`}
           >
             <div className={`grid size-14 shrink-0 place-items-center overflow-hidden rounded-xl ${th.imgBox}`}>
               {p.image ? (

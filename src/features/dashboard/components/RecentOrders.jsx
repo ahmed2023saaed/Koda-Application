@@ -20,7 +20,7 @@ function RecentOrders({ orders }) {
         {orders.map((o) => (
           <div
             key={o.id}
-            className={`flex flex-col justify-between gap-3 rounded-2xl border px-4 py-3.5 transition hover:-translate-y-0.5 sm:flex-row sm:items-center ${th.row}`}
+            className={`flex flex-col justify-between gap-4 rounded-3xl border p-4 transition hover:-translate-y-0.5 sm:flex-row sm:items-center ${th.row}`}
           >
             <div>
               <p className={`text-[15px] font-semibold ${th.strong}`}>{o.customer}</p>
