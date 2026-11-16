@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import UserFormPanel from "../components/UserFormPanel";
 import {
   Search,
   UserPlus,
@@ -126,7 +127,7 @@ export default function UsersPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError("");
-  
+
     const payload = {
       username: form.name.trim(),
       email: form.email.trim(),
@@ -136,12 +137,12 @@ export default function UsersPage() {
     };
     if (!payload.phone) delete payload.phone;
     if (!payload.password) delete payload.password;
-  
+
     setSaving(true);
     try {
       let id = editingId;
       let oldRole = "customer";
-  
+
       if (editingId) {
         const old = users.find((x) => getId(x) === editingId);
         if (old && old.role) oldRole = old.role;
@@ -152,7 +153,7 @@ export default function UsersPage() {
         const created = d.user || d.data || d;
         id = created.id !== undefined ? created.id : created._id;
       }
-  
+
       if (id && form.role !== oldRole) {
         try {
           await changeRole({ userId: id, role: form.role });
@@ -160,7 +161,7 @@ export default function UsersPage() {
           setActionError(errMsg(roleErr, "Failed to change role"));
         }
       }
-  
+
       setModalOpen(false);
       await loadUsers();
     } catch (err) {
@@ -232,6 +233,17 @@ export default function UsersPage() {
           </div>
         </div>
       </div>
+      <UserFormPanel
+            open={modalOpen}
+            editing={!!editingId}
+            form={form}
+            setForm={setForm}
+            error={formError}
+            saving={saving}
+            onSubmit={handleSubmit}
+            onClose={() => setModalOpen(false)}
+            onClear={() => setForm(emptyForm)}
+          />
 
       {/* رسالة خطأ للأزرار */}
       {actionError && (
@@ -378,88 +390,6 @@ export default function UsersPage() {
       </div>
 
       {/* Modal: إضافة / تعديل */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-          <form
-            onSubmit={handleSubmit}
-            className={box + " w-full max-w-md space-y-4 p-6"}
-          >
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold">
-                {editingId ? "Edit User" : "Add User"}
-              </h2>
-              <button
-                type="button"
-                onClick={() => setModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {formError && (
-              <div className="rounded-2xl bg-red-100 px-3 py-2 text-sm text-red-700 dark:bg-red-500/20 dark:text-red-300">
-                {formError}
-              </div>
-            )}
-
-            <input
-              required
-              className={inputCls}
-              placeholder="Username"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-            <input
-              required
-              type="email"
-              className={inputCls}
-              placeholder="Email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-            <input
-              className={inputCls}
-              placeholder="Phone (optional)"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            />
-            <input
-              type="password"
-              required={!editingId}
-              className={inputCls}
-              placeholder={editingId ? "New password (optional)" : "Password"}
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-            />
-            <select
-              className={inputCls}
-              value={form.role}
-              onChange={(e) => setForm({ ...form, role: e.target.value })}
-            >
-              <option value="customer">customer</option>
-              <option value="admin">admin</option>
-            </select>
-
-            <div className="flex justify-end gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setModalOpen(false)}
-                className="rounded-2xl border border-slate-200 px-4 py-2 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={saving}
-                className="rounded-2xl bg-cyan-500 px-5 py-2 font-semibold text-white shadow-md transition hover:bg-cyan-600 active:scale-95 disabled:opacity-60"
-              >
-                {saving ? "Saving..." : "Save"}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
     </div>
   );
 }
