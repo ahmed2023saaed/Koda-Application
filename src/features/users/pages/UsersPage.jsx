@@ -199,7 +199,7 @@ export default function UsersPage() {
   ];
 
   return (
-    <div className="min-h-full space-y-6 p-4 md:p-6 bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300">
+    <div className="min-h-full space-y-6 bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300">
       {/* Header */}
       <div className={box + " p-6"}>
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
