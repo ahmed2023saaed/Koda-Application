@@ -1,4 +1,7 @@
 
+
+import { Package2, Star, TrendingUp, Boxes } from "lucide-react";
+
 export default function ProductStats({ products, loading }) {
   const totalItems = products.length;
 
@@ -14,23 +17,52 @@ export default function ProductStats({ products, loading }) {
     (product) => product.stock <= 0
   ).length;
 
+  const stats = [
+    {
+      label: "Total",
+      value: totalItems,
+      Icon: Package2,
+      iconColor: "text-indigo-600 dark:text-indigo-400",
+      iconBg: "bg-indigo-50 dark:bg-slate-800",
+    },
+    {
+      label: "Featured",
+      value: featuredItems,
+      Icon: Star,
+      iconColor: "text-amber-600 dark:text-amber-400",
+      iconBg: "bg-amber-50 dark:bg-slate-800",
+    },
+    {
+      label: "In Stock",
+      value: inStockItems,
+      Icon: TrendingUp,
+      iconColor: "text-green-600 dark:text-green-400",
+      iconBg: "bg-green-50 dark:bg-slate-800",
+    },
+    {
+      label: "Out of Stock",
+      value: outOfStockItems,
+      Icon: Boxes,
+      iconColor: "text-red-600 dark:text-red-400",
+      iconBg: "bg-red-50 dark:bg-slate-800",
+    },
+  ];
+
+
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
-            className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+            className="flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-xl border border-gray-200 bg-white p-3 shadow-sm dark:border-slate-700 dark:bg-slate-900"
           >
-            {/* Text placeholders */}
-            <div className="space-y-3">
-              <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
-              <div className="h-8 w-14 animate-pulse rounded bg-gray-200" />
-              <div className="h-3 w-28 animate-pulse rounded bg-gray-100" />
-            </div>
+            <div className="h-12 w-12 animate-pulse rounded-xl bg-gray-200 dark:bg-slate-700" />
 
-            {/* Icon placeholder */}
-            <div className="h-12 w-12 animate-pulse rounded-lg bg-gray-200" />
+            <div className="h-8 w-16 animate-pulse rounded bg-gray-200 dark:bg-slate-700" />
+
+            <div className="h-3 w-20 animate-pulse rounded bg-gray-100 dark:bg-slate-800" />
           </div>
         ))}
       </div>
@@ -39,125 +71,28 @@ export default function ProductStats({ products, loading }) {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {/* Total Items */}
-      <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div>
-          <p className="text-sm text-gray-500">Total Items</p>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {totalItems}
-          </p>
-          <p className="mt-1 text-xs text-gray-400">
-            On this page
-          </p>
-        </div>
-        <div className="rounded-lg bg-indigo-50 p-3 text-indigo-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m21 8-9-5-9 5 9 5 9-5Z" />
-            <path d="m3 8 9 5 9-5" />
-            <path d="M3 8v8l9 5 9-5V8" />
-            <path d="M12 13v8" />
-          </svg>
-        </div>
-      </div>
+      {stats.map(({ label, value, Icon, iconColor, iconBg }) => (
+        <div
+          key={label}
+          className="flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-xl border border-gray-200 bg-white p-3 text-left shadow-sm dark:border-slate-700 dark:bg-slate-900"
+        >
+          {/* Icon */}
+          <div className={`rounded-xl p-3 ${iconBg} ${iconColor}`}>
+            <Icon size={28} strokeWidth={2} />
+          </div>
 
-      {/* Featured Products */}
-      <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div>
-          <p className="text-sm text-gray-500">Featured</p>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {featuredItems}
+          {/* Actual Number */}
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            {value}
           </p>
-          <p className="mt-1 text-xs text-gray-400">
-            Featured products
-          </p>
-        </div>
-        <div className="rounded-lg bg-amber-50 p-3 text-amber-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" />
-          </svg>
-        </div>
-      </div>
 
-      {/* In Stock */}
-      <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div>
-          <p className="text-sm text-gray-500">In Stock</p>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {inStockItems}
-          </p>
-          <p className="mt-1 text-xs text-gray-400">
-            Available products
+          {/* Label */}
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {label}
           </p>
         </div>
-        <div className="rounded-lg bg-green-50 p-3 text-green-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M3 7h18v13H3z" />
-            <path d="M3 7l2-4h14l2 4" />
-            <path d="m9 14 2 2 4-4" />
-          </svg>
-        </div>
-      </div>
-
-      {/* Out of Stock */}
-      <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div>
-          <p className="text-sm text-gray-500">Out of Stock</p>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {outOfStockItems}
-          </p>
-          <p className="mt-1 text-xs text-gray-400">
-            Unavailable products
-          </p>
-        </div>
-        <div className="rounded-lg bg-red-50 p-3 text-red-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M3 7h18v13H3z" />
-            <path d="M3 7l2-4h14l2 4" />
-            <path d="m10 12 4 4m0-4-4 4" />
-          </svg>
-        </div>
-      </div>
+      ))}
     </div>
-
   );
 }
+

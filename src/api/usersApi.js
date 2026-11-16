@@ -9,9 +9,7 @@ const API = axios.create({
 
 
 // Get all users
-export const getUsers = () => {
-  return API.get("/users");
-};
+export const fetchUsers = () => API.get("/users");
 
 // Get user by ID
 export const getUserById = (id) => {

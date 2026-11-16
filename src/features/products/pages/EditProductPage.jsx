@@ -149,46 +149,50 @@ export default function EditProductPage() {
 
     if (isLoading) {
         return (
-            <div className="space-y-6">
+            <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
+                <div className="mx-auto max-w-6xl space-y-6">
 
-                {/* Branded Koda Loader */}
-                <BrandLoader message="Loading Product Details..." />
+                    {/* Branded Koda Loader */}
+                    <BrandLoader message="Loading Product Details..." />
 
-                {/* Introduction skeleton */}
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 space-y-4 animate-pulse">
-                    <div className="h-3 w-28 rounded bg-gray-200"></div>
-                    <div className="h-8 w-64 max-w-full rounded bg-gray-200"></div>
-                    <div className="h-4 w-full max-w-xl rounded bg-gray-200"></div>
-                    <div className="h-4 w-48 rounded bg-gray-200"></div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
-                    {/* Gallery skeleton */}
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 space-y-4 animate-pulse">
-                        <div className="h-6 w-40 rounded bg-gray-200"></div>
-                        <div className="aspect-square w-full rounded-xl bg-gray-200"></div>
-                        <div className="flex gap-3">
-                            <div className="h-20 w-20 rounded-lg bg-gray-200"></div>
-                            <div className="h-20 w-20 rounded-lg bg-gray-200"></div>
-                            <div className="h-20 w-20 rounded-lg bg-gray-200"></div>
-                        </div>
+                    {/* Introduction skeleton */}
+                    <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-6 animate-pulse dark:border-slate-700 dark:bg-slate-900">
+                        <div className="h-3 w-28 rounded bg-gray-200 dark:bg-slate-700"></div>
+                        <div className="h-8 w-64 max-w-full rounded bg-gray-200 dark:bg-slate-700"></div>
+                        <div className="h-4 w-full max-w-xl rounded bg-gray-200 dark:bg-slate-700"></div>
+                        <div className="h-4 w-48 rounded bg-gray-200 dark:bg-slate-700"></div>
                     </div>
 
-                    {/* Product form skeleton */}
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 space-y-5 animate-pulse">
-                        <div className="h-6 w-40 rounded bg-gray-200"></div>
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
-                        {Array.from({ length: 6 }).map((_, index) => (
-                            <div key={index} className="space-y-2">
-                                <div className="h-4 w-28 rounded bg-gray-200"></div>
-                                <div className="h-11 w-full rounded-lg bg-gray-200"></div>
+                        {/* Gallery skeleton */}
+                        <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-6 animate-pulse dark:border-slate-700 dark:bg-slate-900">
+                            <div className="h-6 w-40 rounded bg-gray-200 dark:bg-slate-700"></div>
+
+                            <div className="aspect-square w-full rounded-xl bg-gray-200 dark:bg-slate-800"></div>
+
+                            <div className="flex gap-3">
+                                <div className="h-20 w-20 rounded-lg bg-gray-200 dark:bg-slate-700"></div>
+                                <div className="h-20 w-20 rounded-lg bg-gray-200 dark:bg-slate-700"></div>
+                                <div className="h-20 w-20 rounded-lg bg-gray-200 dark:bg-slate-700"></div>
                             </div>
-                        ))}
+                        </div>
 
-                        <div className="h-11 w-full rounded-lg bg-gray-200"></div>
+                        {/* Product form skeleton */}
+                        <div className="space-y-5 rounded-2xl border border-gray-200 bg-white p-6 animate-pulse dark:border-slate-700 dark:bg-slate-900">
+                            <div className="h-6 w-40 rounded bg-gray-200 dark:bg-slate-700"></div>
+
+                            {Array.from({ length: 6 }).map((_, index) => (
+                                <div key={index} className="space-y-2">
+                                    <div className="h-4 w-28 rounded bg-gray-200 dark:bg-slate-700"></div>
+                                    <div className="h-11 w-full rounded-lg bg-gray-200 dark:bg-slate-700"></div>
+                                </div>
+                            ))}
+
+                            <div className="h-11 w-full rounded-lg bg-gray-200 dark:bg-slate-700"></div>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
         );
@@ -197,45 +201,76 @@ export default function EditProductPage() {
 
 
 
+
+
+
+
     if (error) {
-        return <p className="text-red-600">{error}</p>;
+        return (
+            <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6">
+                <div className="mx-auto max-w-6xl">
+                    <p className="text-red-600">{error}</p>
+                </div>
+            </div>
+        );
     }
 
     if (!product) {
-        return <p>Product not found.</p>;
+        return (
+            <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6">
+                <div className="mx-auto max-w-6xl">
+                    <p>Product not found.</p>
+                </div>
+            </div>
+        );
     }
 
     return (
-        <div className="space-y-6">
-            <ProductPageHeader
-                eyebrow="EDIT PRODUCT"
-                title="Update your product details"
-                description="Modify product information, manage images, and keep your catalog up to date."
-                status="EDITING"
-                statusDescription="Review your changes before saving."
-            />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Product gallery */}
-                <div>
-                    <ProductGallery
-                        images={images}
-                        onImageUpload={handleImageUpload}
-                        onRemoveImage={handleRemoveImage}
-                    />
-                </div>
-                {/* Product form */}
-                <div>
-                    <ProductForm
-                        key={product._id}
-                        initialValues={product}
-                        submitLabel="Save Changes"
-                        onSubmit={handleUpdateProduct}
-                        isSubmitting={isSubmitting}
-                    />
+        <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
+
+            <div className="mx-auto max-w-6xl space-y-6">
+                <ProductPageHeader
+                    eyebrow="EDIT PRODUCT"
+                    title="Update your product details"
+                    description="Modify product information, manage images, and keep your catalog up to date."
+                    status="LIVE"
+                    statusDescription="Connected to the real product update API"
+                />
+
+                {/* <ProductPageHeader
+                    eyebrow="EDIT PRODUCT"
+                    title="Update your product details"
+                    description="Modify product information, manage images, and keep your catalog up to date."
+                    status="EDITING"
+                    statusDescription="Review your changes before saving."
+                /> */}
+
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+                    {/* Product gallery */}
+                    <div>
+                        <ProductGallery
+                            images={images}
+                            onImageUpload={handleImageUpload}
+                            onRemoveImage={handleRemoveImage}
+                        />
+                    </div>
+
+                    {/* Product form */}
+                    <div>
+                        <ProductForm
+                            key={product._id}
+                            initialValues={product}
+                            submitLabel="Save Changes"
+                            onSubmit={handleUpdateProduct}
+                            isSubmitting={isSubmitting}
+                        />
+                    </div>
+
                 </div>
             </div>
-
-
         </div>
     );
+
+
 }

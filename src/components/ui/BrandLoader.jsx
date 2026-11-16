@@ -1,9 +1,11 @@
+
+
 export default function BrandLoader({ message = "Loading..." }) {
     return (
         <div className="flex flex-col items-center justify-center gap-4 py-12">
 
             {/* Rotating Logo */}
-            <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin dark:border-slate-700 dark:border-t-blue-400">
                 <img
                     src="/images/image12.jpeg"
                     alt="Koda Logo"
@@ -13,11 +15,11 @@ export default function BrandLoader({ message = "Loading..." }) {
 
             {/* Loading Text */}
             <div className="text-center">
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                     Koda Dashboard
                 </h2>
 
-                <p className="mt-1 text-sm font-medium text-gray-500">
+                <p className="mt-1 text-sm font-medium text-gray-500 dark:text-gray-400">
                     {message}
                 </p>
             </div>

@@ -18,7 +18,6 @@ export default function ProductImageCarousel({ product }) {
       );
     }, 3000);
 
-    // Clean up the timer when the component is removed.
     return () => clearInterval(intervalId);
   }, [currentIndex, images.length]);
 
@@ -38,7 +37,7 @@ export default function ProductImageCarousel({ product }) {
 
   if (images.length === 0) {
     return (
-      <div className="mb-4 flex h-40 items-center justify-center rounded-lg bg-gray-100 text-gray-400">
+      <div className="mb-4 flex h-40 items-center justify-center rounded-lg bg-gray-100 text-gray-400 dark:bg-slate-800 dark:text-gray-500">
         No Image
       </div>
     );
@@ -46,17 +45,20 @@ export default function ProductImageCarousel({ product }) {
 
   return (
     <div className="group relative mb-4 overflow-hidden rounded-lg">
+
       {/* Stock status badge */}
       <span
-        className={`absolute right-3 bottom-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${Number(product.stock) > 0
-          ? "bg-green-100 text-green-700"
-          : "bg-red-100 text-red-700"
-          }`}
+        className={`absolute right-3 bottom-3 z-10 rounded-full px-3 py-1 text-xs font-semibold ${
+          Number(product.stock) > 0
+            ? "bg-green-100 text-green-700"
+            : "bg-red-100 text-red-700"
+        }`}
       >
         {Number(product.stock) > 0
           ? `In Stock (${Number(product.stock)})`
           : "Out of Stock"}
       </span>
+
       {/* Featured status badge */}
       {product.featured === true && (
         <span className="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-700">
@@ -64,6 +66,7 @@ export default function ProductImageCarousel({ product }) {
           Featured
         </span>
       )}
+
       {/* Sliding image track */}
       <div
         className="flex transition-transform duration-500 ease-in-out motion-reduce:transition-none"
@@ -81,10 +84,8 @@ export default function ProductImageCarousel({ product }) {
               alt={`${product.name || "Product"} - image ${index + 1}`}
               loading="eager"
               decoding="async"
-              className="h-56 w-full bg-gray-100 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+              className="h-56 w-full bg-gray-100 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 dark:bg-slate-800"
             />
-
-
           </div>
         ))}
       </div>
@@ -96,7 +97,7 @@ export default function ProductImageCarousel({ product }) {
             type="button"
             onClick={showPrevious}
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-gray-800 shadow hover:bg-white"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-gray-800 shadow transition hover:bg-white dark:bg-slate-900/90 dark:text-gray-100 dark:hover:bg-slate-800"
           >
             &#10094;
           </button>
@@ -105,7 +106,7 @@ export default function ProductImageCarousel({ product }) {
             type="button"
             onClick={showNext}
             aria-label="Next image"
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-gray-800 shadow hover:bg-white"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-gray-800 shadow transition hover:bg-white dark:bg-slate-900/90 dark:text-gray-100 dark:hover:bg-slate-800"
           >
             &#10095;
           </button>
@@ -119,5 +120,6 @@ export default function ProductImageCarousel({ product }) {
     </div>
   );
 }
+
 
 

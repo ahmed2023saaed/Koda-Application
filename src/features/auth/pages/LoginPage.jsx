@@ -112,11 +112,11 @@ function Login() {
   //   }
   // }
   return (
-    <div className="fixed inset-0 overflow-y-auto bg-[#0b1a2b] flex p-4 lg:p-8 [color-scheme:dark]">
-      <div className="m-auto w-full max-w-md lg:max-w-6xl bg-[#0b1a2b] rounded-3xl border border-white/15 overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+    <div className="fixed inset-0 overflow-y-auto bg-[#0a1628] flex p-4 lg:p-8 [color-scheme:dark]">
+  <div className="m-auto w-full max-w-md lg:max-w-6xl bg-[#0f1f3a] rounded-3xl border border-white/15 overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl shadow-blue-900/40">
 
         {/* Left Side (hidden on mobile / tablet) */}
-        <div className="hidden lg:flex flex-col justify-center p-12 text-white bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400">
+        <div className="hidden lg:flex flex-col justify-center p-12 text-white bg-gradient-to-br from-blue-700 via-blue-600 to-blue-400 shadow-xl shadow-blue-900/30">
 
           <div className="flex items-center gap-3 mb-6">
             <ShoppingBag className="w-9 h-9 text-white" />
@@ -183,7 +183,7 @@ function Login() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-blue-500 transition"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -205,7 +205,7 @@ function Login() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                  className="w-full bg-slate-700/40 border border-slate-600/50 text-white placeholder-slate-300 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:ring-2 focus:ring-blue-500 transition"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -215,10 +215,10 @@ function Login() {
             {error && (<p className="text-red-400 text-sm">{error}</p>)}
 
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-sky-500 to-cyan-400 text-white py-3.5 rounded-2xl font-semibold hover:opacity-90 transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+             <button
+  type="submit"
+  disabled={loading}
+className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3.5 rounded-2xl font-semibold hover:opacity-90 transition cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
 
             >
               {loading ? "Signing in..." : "Sign In"}
