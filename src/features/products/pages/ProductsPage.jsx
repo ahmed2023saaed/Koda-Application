@@ -234,69 +234,101 @@ export default function ProductsPage() {
 
   return (
     <>
-      {/* Delete Confirmation Modal */}
+
+
+
+      {/* Delete Confirmation Prompt */}
       {productToDelete && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-24">
-          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:border dark:border-slate-700 dark:bg-slate-900">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              Confirm Deletion
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-transparent px-4 pt-6">
+
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-dialog-title"
+            aria-describedby="delete-dialog-description"
+            className="delete-prompt-enter w-full max-w-md rounded-2xl border border-black/10 bg-white p-6 text-black shadow-2xl dark:border-white/10 dark:bg-slate-950 dark:text-white"
+          >
+
+            {/* Heading */}
+            <h2
+              id="delete-dialog-title"
+              className="text-lg font-bold tracking-tight"
+            >
+              Are you sure?
             </h2>
 
-            <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-              Are you sure you want to delete{" "}
-              <span className="font-semibold text-gray-900 dark:text-white">
+            {/* Description */}
+            <p
+              id="delete-dialog-description"
+              className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400"
+            >
+              Do you really want to delete{" "}
+              <span className="font-semibold text-black dark:text-white">
                 {productToDelete.name}
               </span>
-              ?
+              ? This action cannot be undone.
             </p>
 
+            {/* Action Buttons */}
             <div className="mt-6 flex justify-end gap-3">
+
               <button
                 type="button"
                 onClick={() => setProductToDelete(null)}
-                className="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-800"
+                className="rounded-xl border border-black bg-white px-5 py-2.5 text-sm font-semibold text-black transition-all duration-200 hover:bg-black hover:text-white dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
               >
-                No
+                Cancel
               </button>
 
               <button
                 type="button"
                 onClick={handleConfirmDelete}
-                className="rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
+                className="rounded-xl bg-black px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
               >
                 Yes, Delete
               </button>
+
             </div>
           </div>
         </div>
       )}
 
-      {/* Full-page Background */}
-      <div className="-m-4 min-h-full bg-slate-50 p-4 md:-m-6 md:p-6 dark:bg-slate-950">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6">
 
-          <section className="flex flex-col gap-6">
+
+
+
+
+      {/* Full-page Background */}
+      <div className="-m-4 min-h-full bg-slate-50 py-4 pl-6 pr-4 dark:bg-slate-950 md:-m-6 md:py-6 md:pl-10 md:pr-6">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-7">
+
+          <section className="flex flex-col gap-7">
 
             {loading ? (
               <BrandLoader message="Products Loading..." />
             ) : (
               /* Gradient Introduction Card */
-              <div className="mb-6 flex min-h-[160px] w-full items-center rounded-2xl bg-gradient-to-r from-sky-400 via-blue-600 to-blue-900 p-7 shadow-md dark:bg-none dark:bg-slate-900 dark:border dark:border-slate-700 dark:shadow-sm">
+              <div className="relative mx-1 flex min-h-[130px] items-center overflow-hidden rounded-3xl border border-cyan-100 bg-gradient-to-br from-white via-cyan-50/60 to-white px-7 py-5 shadow-sm dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 dark:shadow-none">
+                {/* Top-right cyan glow */}
+                <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan-200/50 blur-3xl dark:bg-cyan-500/10" />
+
+                {/* Bottom-left violet glow */}
+                <div className="pointer-events-none absolute -bottom-12 left-8 h-44 w-44 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-500/10" />
 
                 <div className="flex w-full flex-col items-center justify-center gap-5 sm:flex-row sm:justify-between">
 
                   {/* Title and subtitle */}
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/20 text-white dark:bg-slate-800 dark:text-blue-400">
-                      <Package2 size={32} />
+                  <div className="relative z-10 flex items-center gap-4">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-sky-700 dark:bg-slate-800 dark:text-teal-400">
+                      <Package2 size={36} />
                     </div>
 
                     <div>
-                      <p className="text-lg font-medium text-blue-50 dark:text-gray-400">
-                        Product Dashboard
+                      <p className="text-lg tracking-widest font-sm text-blue-900 dark:text-gray-400">
+                        PRODUCT DASHBOARD
                       </p>
 
-                      <h1 className="mt-1 text-3xl font-bold text-white dark:text-gray-100">
+                      <h1 className="mt-1 text-4xl font-bold text-black dark:text-gray-100">
                         Products
                       </h1>
                     </div>
@@ -306,7 +338,7 @@ export default function ProductsPage() {
                   <button
                     type="button"
                     onClick={() => navigate("/products/add")}
-                    className="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/80 bg-transparent px-5 py-3 text-base font-semibold text-white shadow-none transition-all duration-300 hover:border-white hover:bg-white/15 dark:border-sky-400 dark:text-sky-300 dark:hover:border-sky-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
+                    className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-300 bg-cyan-500 px-5 py-3 text-base font-bold tracking-wide text-white shadow-md shadow-cyan-200 transition-all duration-300 hover:bg-cyan-400 hover:shadow-cyan-300 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-cyan-300 dark:shadow-none dark:hover:border-cyan-400/50 dark:hover:bg-cyan-500/20 dark:hover:text-cyan-200"
 
                   >
                     <Plus
