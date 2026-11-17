@@ -89,7 +89,7 @@ export default function Sidebar({ isDarkMode }) {
 
   return (
     <aside
-      className={`w-64 min-h-screen flex flex-col border-r transition-colors duration-300 ${
+      className={`w-72 min-h-screen flex flex-col border-r transition-colors duration-300 ${
         isDarkMode
           ? "bg-[#050817] border-gray-800/60 text-white"
           : "bg-white border-gray-200 text-gray-900"

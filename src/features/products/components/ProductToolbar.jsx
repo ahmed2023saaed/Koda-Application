@@ -51,7 +51,7 @@ export default function ProductToolbar({ onSearch, loading }) {
   // Loading skeleton
   if (loading) {
     return (
-      <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+      <div className="mx-1 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
         <div className="flex flex-wrap items-center gap-3">
           <div className="h-12 min-w-[200px] flex-1 animate-pulse rounded-lg bg-gray-200 dark:bg-slate-700" />
           <div className="h-12 w-28 animate-pulse rounded-lg bg-gray-200 dark:bg-slate-700" />
@@ -62,7 +62,7 @@ export default function ProductToolbar({ onSearch, loading }) {
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+    <div className="mx-1 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
 
       {/* Main toolbar */}
       <div className="flex flex-wrap items-center gap-3">
@@ -88,8 +88,8 @@ export default function ProductToolbar({ onSearch, loading }) {
           type="button"
           onClick={() => setIsFilterOpen((previous) => !previous)}
           className={`flex items-center gap-2 rounded-lg border px-4 py-3 transition-all duration-300 ${isFilterOpen
-              ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-950/50 dark:text-indigo-300"
-              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
+            ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-950/50 dark:text-indigo-300"
+            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
             }`}
         >
           <SlidersHorizontal size={18} />

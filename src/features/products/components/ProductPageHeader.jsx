@@ -1,125 +1,92 @@
 
 
-// import { Package2 } from "lucide-react";
-// import { Link } from "react-router-dom";
-
-// export default function ProductPageHeader({
-//     eyebrow = "CREATE PRODUCT",
-//     title = "Launch a polished product entry",
-//     description = "Add products with validation, image previews, multi-upload support, and smooth UX.",
-//     status = "READY",
-//     statusDescription = "Create, validate, and save with one click.",
-// }) {
-//     return (
-//         <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-
-//             {/* Back Button */}
-//             <Link
-//                 to="/products"
-//                 className="inline-flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-800"
-//             >
-//                 <span>←</span>
-//                 Back to Products
-//             </Link>
-
-//             <div className="mt-6 grid items-center gap-6 md:grid-cols-[1fr_260px]">
-
-//                 {/* Intro Text */}
-//                 <div>
-//                     <p className="text-xs font-semibold tracking-widest text-blue-600 dark:text-blue-400">
-//                         {eyebrow}
-//                     </p>
-
-//                     <h1 className="mt-2 flex flex-wrap items-center gap-3 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
-//                         {title}
-
-//                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/50">
-//                             <Package2
-//                                 size={34}
-//                                 strokeWidth={1.8}
-//                                 className="text-blue-600 dark:text-blue-400"
-//                             />
-//                         </div>
-//                     </h1>
-
-//                     <p className="mt-3 text-sm leading-6 text-gray-500 dark:text-gray-400">
-//                         {description}
-//                     </p>
-//                 </div>
-
-//                 {/* Status Card */}
-//                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800">
-//                     <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-//                         {status}
-//                     </p>
-
-//                     <p className="mt-2 text-sm leading-5 text-gray-500 dark:text-gray-400">
-//                         {statusDescription}
-//                     </p>
-//                 </div>
-
-//             </div>
-//         </section>
-//     );
-// }
-
-import { Package2 } from "lucide-react";
+import { Package2, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function ProductPageHeader({
     eyebrow = "CREATE PRODUCT",
+    eyebrowClassName = "text-cyan-600 dark:text-cyan-400",
+
     title = "Launch a polished product entry",
     description = "Add products with validation, image previews, multi-upload support, and smooth UX.",
+
     status = "READY",
+    statusClassName = "text-cyan-600 dark:text-cyan-300",
+
     statusDescription = "Create, validate, and save with one click.",
+    iconClassName = "text-cyan-600 dark:text-cyan-400",
 }) {
     return (
-        <section className="rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-sm">
+        <section className="relative overflow-hidden rounded-[32px] border border-cyan-100 bg-gradient-to-br from-white via-cyan-50/60 to-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:shadow-2xl">
 
-            {/* Back Button */}
-            <Link
-                to="/products"
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-slate-800"
-            >
-                <span>←</span>
-                Back to Products
-            </Link>
+            {/* Top-right cyan glow */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-14 -top-14 h-44 w-44 rounded-full bg-cyan-200/50 blur-3xl dark:bg-cyan-500/15"
+            />
 
-            <div className="mt-6 grid items-center gap-6 md:grid-cols-[1fr_260px]">
+            {/* Bottom-left violet glow */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-0 left-0 h-44 w-44 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-500/15"
+            />
 
-                {/* Intro Text */}
-                <div>
-                    <p className="text-xs font-semibold tracking-widest text-sky-400">
-                        {eyebrow}
-                    </p>
+            {/* Main content */}
+            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 
-                    <h1 className="mt-2 flex flex-wrap items-center gap-3 text-2xl font-bold text-white sm:text-3xl">
-                        {title}
+                {/* Intro section */}
+                <div className="min-w-0 flex-1">
 
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-800">
+                    {/* Back button */}
+                    <Link
+                        to="/products"
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-cyan-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+                    >
+                        <ArrowLeft size={16} />
+                        Back to products
+                    </Link>
+
+                    {/* Icon and title */}
+                    <div className="mt-5 flex items-center gap-4">
+
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-200 bg-cyan-100 dark:border-cyan-500/20 dark:bg-cyan-500/10">
                             <Package2
-                                size={34}
+                                size={28}
                                 strokeWidth={1.8}
-                                className="text-sky-400"
+                                className={iconClassName}
                             />
                         </div>
-                    </h1>
 
-                    <p className="mt-3 text-sm leading-6 text-slate-400">
+                        <div className="min-w-0">
+                            <p className={`text-xs font-semibold uppercase tracking-[0.35em] ${eyebrowClassName}`}>
+                                {eyebrow}
+                            </p>
+
+                            <h1 className="mt-1 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl lg:text-4xl dark:text-white">
+                                {title}
+                            </h1>
+                        </div>
+
+                    </div>
+
+                    {/* Description */}
+                    <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
                         {description}
                     </p>
+
                 </div>
 
-                {/* Status Card */}
-                <div className="rounded-xl border border-slate-700 bg-slate-800 p-4">
+                {/* Status card */}
+                <div className="w-full rounded-3xl border border-cyan-100 bg-white/70 p-4 shadow-xl backdrop-blur sm:p-5 lg:max-w-[260px] dark:border-white/10 dark:bg-white/5">
 
-                    <p className="text-sm font-bold tracking-wide text-sky-400">
+                    <p className={`text-xs font-bold uppercase tracking-[0.3em] ${statusClassName}`}>
                         {status}
                     </p>
 
-                    <p className="mt-2 text-sm leading-5 text-slate-300">
+                    <p className="mt-2 text-sm leading-5 text-slate-600 dark:text-slate-200">
                         {statusDescription}
                     </p>
+
                 </div>
 
             </div>

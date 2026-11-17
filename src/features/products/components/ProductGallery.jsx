@@ -6,6 +6,9 @@ export default function ProductGallery({
     images,
     onImageUpload,
     onRemoveImage,
+    defaultPlaceholder,
+    iconClassName = "text-blue-600 dark:text-blue-400",
+    uploadAreaClassName = "border-cyan-300 bg-cyan-50/30 hover:border-cyan-500 hover:bg-cyan-100/60 hover:shadow-[inset_0_0_24px_rgba(6,182,212,0.18)] dark:border-cyan-500/40 dark:bg-slate-800/50 dark:hover:border-cyan-400/70 dark:hover:bg-cyan-500/10 dark:hover:shadow-[inset_0_0_28px_rgba(6,182,212,0.14)]",
 }) {
     return (
         <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
@@ -16,7 +19,7 @@ export default function ProductGallery({
                     <ImagePlus
                         size={30}
                         strokeWidth={1.8}
-                        className="text-blue-600 dark:text-blue-400"
+                        className={iconClassName}
                     />
                 </div>
 
@@ -32,18 +35,27 @@ export default function ProductGallery({
             </div>
 
             {/* Image Previews */}
-            <div className="mt-6 grid grid-cols-3 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-4">
                 {images.length === 0 ? (
-                    <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 dark:border-slate-600 dark:bg-slate-800">
-                        <ImagePlus
-                            size={32}
-                            strokeWidth={1.7}
-                            className="text-gray-400 dark:text-gray-500"
-                        />
-
-                        <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
-                            Image preview
-                        </p>
+                    <div className="relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-gray-50 dark:border-slate-700 dark:bg-slate-800">
+                        {defaultPlaceholder ? (
+                            <img
+                                src={defaultPlaceholder}
+                                alt="Default product image preview"
+                                className="h-full w-full object-cover [transform:scale(1.06,1.12)]"
+                            />
+                        ) : (
+                            <div className="flex h-full flex-col items-center justify-center">
+                                <ImagePlus
+                                    size={32}
+                                    strokeWidth={1.7}
+                                    className={iconClassName}
+                                />
+                                <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+                                    Image preview
+                                </p>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     images.map((image, index) => (
@@ -55,7 +67,7 @@ export default function ProductGallery({
                                 <img
                                     src={image.preview || image.url}
                                     alt={`Product image ${index + 1}`}
-                                    className="h-full w-full object-cover"
+                                    className="h-full w-full object-cover [transform:scale(1.06,1.12)]"
                                 />
 
                                 <button
@@ -78,11 +90,10 @@ export default function ProductGallery({
 
             {/* Upload Area */}
             <label
-                className={`mt-6 flex min-h-48 flex-col items-center justify-center rounded-xl border-2 border-dashed px-4 py-8 text-center transition ${
-                    images.length >= 5
+                className={`mt-6 flex min-h-48 flex-col items-center justify-center rounded-3xl border-2 border-dashed px-4 py-8 text-center transition-all duration-300 ${images.length >= 5
                         ? "cursor-not-allowed border-gray-200 bg-gray-100 opacity-60 dark:border-slate-700 dark:bg-slate-800"
-                        : "cursor-pointer border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50/40 dark:border-slate-600 dark:bg-slate-800/50 dark:hover:border-blue-500 dark:hover:bg-blue-950/30"
-                }`}
+                        : `cursor-pointer ${uploadAreaClassName}`
+                    }`}
             >
                 <input
                     type="file"
@@ -97,7 +108,7 @@ export default function ProductGallery({
                     <ImagePlus
                         size={38}
                         strokeWidth={1.7}
-                        className="text-blue-600 dark:text-blue-400"
+                        className={iconClassName}
                     />
                 </div>
 
