@@ -3,7 +3,6 @@ import api from "../../../Api/axios";
 import CartCard from "../components/CartCard";
 import { mockCart } from "../mockCarts";
 
-
 const USE_MOCK = false;
 
 function CartsPage() {
@@ -46,24 +45,24 @@ function CartsPage() {
 
   return (
     <section className="space-y-6">
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-        <p className="text-xs uppercase tracking-[0.3em] text-cyan-400">Carts</p>
-        <h1 className="mt-2 text-2xl font-bold text-white">Cart overview</h1>
-        <p className="mt-2 text-sm text-slate-300">
+      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 dark:shadow-none">
+        <p className="text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-400">Carts</p>
+        <h1 className="mt-2 text-2xl font-bold text-slate-900 dark:text-white">Cart overview</h1>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
           All active carts returned from the API are rendered here with their
           latest item details.
         </p>
       </div>
 
       {loading && (
-        <div className="flex items-center gap-3 text-slate-300">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" />
+        <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent dark:border-cyan-400" />
           Loading cart...
         </div>
       )}
 
       {!loading && error && (
-        <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-4 text-red-300">
+        <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-4 text-red-700 dark:text-red-300">
           <p>{error}</p>
           <button
             onClick={() => setReloadKey((k) => k + 1)}
@@ -75,7 +74,7 @@ function CartsPage() {
       )}
 
       {!loading && !error && isEmpty && (
-        <div className="max-w-md rounded-3xl border border-dashed border-slate-700 p-6 text-slate-300">
+        <div className="max-w-md rounded-3xl border border-dashed border-slate-300 p-6 text-slate-600 dark:border-slate-700 dark:text-slate-300">
           No carts returned from the API.
         </div>
       )}
