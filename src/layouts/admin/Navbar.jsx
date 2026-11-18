@@ -21,7 +21,7 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
     }
   };
   const displayName =
-    user?.name || user?.fullName || user?.email || "User";
+    user?.username || user?.fullName || user?.email || "User";
 
   const roleLabel = user?.role
     ? user.role.charAt(0).toUpperCase() + user.role.slice(1)

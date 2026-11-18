@@ -231,41 +231,40 @@ export default function EditProductPage() {
             <div className="mx-auto max-w-6xl space-y-6">
                 <ProductPageHeader
                     eyebrow="EDIT PRODUCT"
+                    eyebrowClassName="text-violet-600 dark:text-violet-400"
                     title="Update your product details"
+                    iconClassName="text-violet-600 dark:text-violet-400"
                     description="Modify product information, manage images, and keep your catalog up to date."
                     status="LIVE"
+                    statusClassName="text-violet-600 dark:text-violet-400"
                     statusDescription="Connected to the real product update API"
                 />
 
-                {/* <ProductPageHeader
-                    eyebrow="EDIT PRODUCT"
-                    title="Update your product details"
-                    description="Modify product information, manage images, and keep your catalog up to date."
-                    status="EDITING"
-                    statusDescription="Review your changes before saving."
-                /> */}
+
 
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
                     {/* Product gallery */}
-                    <div>
-                        <ProductGallery
-                            images={images}
-                            onImageUpload={handleImageUpload}
-                            onRemoveImage={handleRemoveImage}
-                        />
-                    </div>
+
+                    <ProductGallery
+                        images={images}
+                        onImageUpload={handleImageUpload}
+                        onRemoveImage={handleRemoveImage}
+                        iconClassName="text-violet-600 dark:text-violet-400"
+                        uploadAreaClassName="border-violet-300 bg-violet-50/30 hover:border-violet-500 hover:bg-violet-100/60 hover:shadow-[inset_0_0_24px_rgba(139,92,246,0.18)] dark:border-violet-500/40 dark:bg-slate-800/50 dark:hover:border-violet-400/70 dark:hover:bg-violet-500/10 dark:hover:shadow-[inset_0_0_28px_rgba(139,92,246,0.14)]"
+                    />
+
 
                     {/* Product form */}
-                    <div>
-                        <ProductForm
-                            key={product._id}
-                            initialValues={product}
-                            submitLabel="Save Changes"
-                            onSubmit={handleUpdateProduct}
-                            isSubmitting={isSubmitting}
-                        />
-                    </div>
+
+                    <ProductForm
+                        key={product._id}
+                        initialValues={product}
+                        submitLabel="Save Changes"
+                        onSubmit={handleUpdateProduct}
+                        isSubmitting={isSubmitting}
+                    />
+
 
                 </div>
             </div>

@@ -22,31 +22,33 @@ export default function ProductStats({ products, loading }) {
       label: "Total",
       value: totalItems,
       Icon: Package2,
-      iconColor: "text-indigo-600 dark:text-indigo-400",
-      iconBg: "bg-indigo-50 dark:bg-slate-800",
+      iconColor: "text-sky-600 dark:text-gray-400",
+      iconBg: "bg-teal-100 dark:bg-slate-800",
     },
     {
       label: "Featured",
       value: featuredItems,
       Icon: Star,
-      iconColor: "text-amber-600 dark:text-amber-400",
-      iconBg: "bg-amber-50 dark:bg-slate-800",
+      iconColor: "text-amber-600 dark:text-gray-400",
+      iconBg: "bg-amber-100 dark:bg-slate-800",
     },
     {
       label: "In Stock",
       value: inStockItems,
       Icon: TrendingUp,
-      iconColor: "text-green-600 dark:text-green-400",
-      iconBg: "bg-green-50 dark:bg-slate-800",
+      iconColor: "text-green-600 dark:text-gray-400",
+      iconBg: "bg-green-100 dark:bg-slate-800",
     },
     {
       label: "Out of Stock",
       value: outOfStockItems,
       Icon: Boxes,
-      iconColor: "text-red-600 dark:text-red-400",
-      iconBg: "bg-red-50 dark:bg-slate-800",
+      iconColor: "text-red-600 dark:text-gray-400",
+      iconBg: "bg-red-100 dark:bg-slate-800",
     },
   ];
+
+
 
 
 
@@ -56,7 +58,7 @@ export default function ProductStats({ products, loading }) {
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
-            className="flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-xl border border-gray-200 bg-white p-3 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+            className="mx-1 flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm dark:border-slate-700 dark:bg-slate-900"
           >
             <div className="h-12 w-12 animate-pulse rounded-xl bg-gray-200 dark:bg-slate-700" />
 
@@ -74,15 +76,15 @@ export default function ProductStats({ products, loading }) {
       {stats.map(({ label, value, Icon, iconColor, iconBg }) => (
         <div
           key={label}
-          className="flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-xl border border-gray-200 bg-white p-3 text-left shadow-sm dark:border-slate-700 dark:bg-slate-900"
+          className="mx-1 flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-3xl border border-gray-200 bg-white p-3 text-left shadow-sm dark:border-slate-700 dark:bg-slate-900"
         >
           {/* Icon */}
           <div className={`rounded-xl p-3 ${iconBg} ${iconColor}`}>
-            <Icon size={28} strokeWidth={2} />
+            <Icon size={20} strokeWidth={2} />
           </div>
 
           {/* Actual Number */}
-          <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {value}
           </p>
 

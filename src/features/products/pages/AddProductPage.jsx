@@ -8,6 +8,7 @@ import ProductPageHeader from "../components/ProductPageHeader";
 import ProductGallery from "../components/ProductGallery";
 import { createProduct } from "../services/productService";
 import { useAuth } from "@/features/auth/contexts/authContext";
+import defaultProductImage from "@/images/b4.png";
 
 export default function AddProductPage() {
     const navigate = useNavigate();
@@ -102,7 +103,12 @@ export default function AddProductPage() {
 
             {/* Keep the content centered and limited in width */}
             <div className="mx-auto max-w-6xl space-y-6">
-                <ProductPageHeader />
+                <ProductPageHeader
+                    eyebrow="CREATE PRODUCT"
+                    eyebrowClassName="text-cyan-600 dark:text-cyan-400"
+                    status="READY"
+                    statusClassName="text-cyan-600 dark:text-cyan-400"
+                />
 
                 {error && (
                     <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
@@ -115,6 +121,8 @@ export default function AddProductPage() {
                         images={images}
                         onImageUpload={handleImageUpload}
                         onRemoveImage={handleRemoveImage}
+                        defaultPlaceholder={defaultProductImage}
+                        iconClassName="text-cyan-600 dark:text-cyan-400"
                     />
 
                     <ProductForm

@@ -5,34 +5,32 @@ import RecentOrders from "../components/RecentOrders";
 import Icon from "../components/Icon";
 import { formatMoney } from "../data/mockDashboard";
 import useDashboard from "../hooks/useDashboard";
+import useDashTheme from "../hooks/useDashTheme";
 
 function DashboardPage() {
   const { data, loading, error } = useDashboard();
+  const th = useDashTheme();
 
   if (loading)
     return (
-      <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6 text-slate-400">
+      <div className={`rounded-2xl border p-6 ${th.panel} ${th.muted}`}>
         Loading dashboard...
       </div>
     );
 
   if (error)
-    return (
-      <div className="rounded-2xl border border-red-900 bg-red-950/40 p-6 text-red-300">
-        {error}
-      </div>
-    );
+    return <div className={`rounded-2xl border p-6 ${th.error}`}>{error}</div>;
 
   if (!data) return null;
 
   const { totals, orderStatus, topProducts, recentOrders } = data;
 
   return (
-    <div className="flex flex-col gap-5 text-slate-100">
-      <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6">
-        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-cyan-400">Admin Overview</p>
-        <h1 className="mb-2 text-3xl font-bold text-slate-50">Real-time commerce health</h1>
-        <p className="text-slate-400">
+    <div className="flex flex-col gap-5">
+      <section className={`rounded-3xl border p-6 ${th.panel}`}>
+        <p className={`mb-2 text-xs uppercase tracking-[0.3em] ${th.eyebrow}`}>Admin Overview</p>
+        <h1 className={`mb-2 text-3xl font-bold ${th.title}`}>Real-time commerce health</h1>
+        <p className={th.muted}>
           Monitor your storefront with AI-style clarity and live API metrics.
         </p>
       </section>

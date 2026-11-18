@@ -10,7 +10,6 @@ const labelCls =
 
 export default function UserFormPanel({
   open,
-  editing,
   form,
   setForm,
   error,
@@ -23,19 +22,17 @@ export default function UserFormPanel({
 
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg dark:border-slate-800 dark:bg-slate-900">
-      <div className="flex items-center justify-between p-6">
-        <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500 text-white shadow-md">
+      <div className="flex items-center justify-between p-4 sm:p-6">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-cyan-500 text-white shadow-md">
             <UserPlus size={22} />
           </div>
           <div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              {editing ? "Edit User" : "Create New User"}
+              Create New User
             </h3>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              {editing
-                ? "Update the details below"
-                : "Fill in the details below to add a new user"}
+              Fill in the details below to add a new user
             </p>
           </div>
         </div>
@@ -50,12 +47,12 @@ export default function UserFormPanel({
 
       <form onSubmit={onSubmit}>
         {error && (
-          <div className="mx-6 mb-4 rounded-2xl bg-red-100 px-4 py-3 text-sm text-red-700 dark:bg-red-500/20 dark:text-red-300">
+          <div className="mx-4 mb-4 rounded-2xl bg-red-100 px-4 py-3 text-sm text-red-700 dark:bg-red-500/20 dark:text-red-300 sm:mx-6">
             {error}
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-5 border-t border-slate-200 p-6 dark:border-slate-800 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 border-t border-slate-200 p-4 dark:border-slate-800 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
           <div>
             <label className={labelCls}>
               Username <span className="text-red-500">*</span>
@@ -85,13 +82,13 @@ export default function UserFormPanel({
 
           <div>
             <label className={labelCls}>
-              Password {!editing && <span className="text-red-500">*</span>}
+              Password <span className="text-red-500">*</span>
             </label>
             <input
               type="password"
-              required={!editing}
+              required
               className={inputCls}
-              placeholder={editing ? "New password (optional)" : "••••••••"}
+              placeholder="••••••••"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
@@ -108,9 +105,9 @@ export default function UserFormPanel({
           </div>
         </div>
 
-        <div className="mx-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 py-5 dark:border-slate-800">
+        <div className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 py-5 dark:border-slate-800 sm:mx-6">
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            <span className="text-red-500">*</span> Required fields
+<span className="text-red-500">*</span> Required fields
           </p>
           <div className="flex items-center gap-3">
             <button
@@ -126,7 +123,7 @@ export default function UserFormPanel({
               className="flex items-center gap-2 rounded-2xl bg-cyan-500 px-5 py-2.5 font-semibold text-white shadow-md transition hover:bg-cyan-600 active:scale-95 disabled:opacity-60"
             >
               <UserPlus size={16} />
-              {saving ? "Saving..." : editing ? "Save" : "Create User"}
+              {saving ? "Saving..." : "Create User"}
             </button>
           </div>
         </div>
