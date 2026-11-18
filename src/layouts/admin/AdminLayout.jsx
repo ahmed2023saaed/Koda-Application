@@ -61,20 +61,23 @@ import { useTheme } from "@/contexts/themeContext";
 import Sidebar from "./Sidebar";
 import Topbar from "./Navbar";
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 export function AdminLayout() {
   const { isDarkMode, toggleTheme } = useTheme();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Sidebar */}
-      <Sidebar isDarkMode={isDarkMode} />
+      <Sidebar isDarkMode={isDarkMode} open={open} onClose={() => setOpen(false)} />
 
       {/* Main area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar
           isDarkMode={isDarkMode}
           toggleTheme={toggleTheme}
+          onMenuClick={() => setOpen(true)}
         />
 
         <main className="flex-1 overflow-y-auto bg-slate-100 dark:bg-slate-950 p-4 md:p-6">

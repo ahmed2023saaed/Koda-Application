@@ -2,7 +2,7 @@
 import { NavLink } from "react-router-dom";
 // import { useTheme } from "../../contexts/themeContext";
 
-export default function Sidebar({ isDarkMode }) {
+export default function Sidebar({ isDarkMode, open, onClose }) {
   // const { isDarkMode } = useTheme();
   const navItems = [
     {
@@ -88,8 +88,10 @@ export default function Sidebar({ isDarkMode }) {
     "flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-sm font-semibold transition-colors duration-200";
 
   return (
+    <>
+    {open && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onClose} />}
     <aside
-      className={`w-72 min-h-screen flex flex-col border-r transition-colors duration-300 ${
+      className={`fixed inset-y-0 left-0 z-50 w-72 min-h-screen flex flex-col transition-transform duration-300 lg:static lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"} ${
         isDarkMode
           ? "bg-[#050817] border-gray-800/60 text-white"
           : "bg-white border-gray-200 text-gray-900"
@@ -115,6 +117,7 @@ export default function Sidebar({ isDarkMode }) {
           <NavLink
             key={to}
             to={to}
+            onClick={onClose}
             end={to === "/products"}
             className={({ isActive }) =>
               `${baseClass} ${
@@ -144,5 +147,6 @@ export default function Sidebar({ isDarkMode }) {
         </div>
       </div>
     </aside>
+    </>
   );
 }

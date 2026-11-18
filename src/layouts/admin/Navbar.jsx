@@ -4,7 +4,7 @@ import { useAuth } from "@/features/auth/contexts/authContext";
 import api from "@/api/axios";
 import logoImage from '@/images/Logo.png';
 // import { useTheme } from '../../contexts/themeContext';
-export default function Topbar({ isDarkMode, toggleTheme }) {
+export default function Topbar({ isDarkMode, toggleTheme, onMenuClick }) {
   // const { logout } = useAuth();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -30,9 +30,12 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
   const avatarInitial =
     displayName.trim().charAt(0).toUpperCase() || "U";
   return (
-    <header className={`${isDarkMode ? 'bg-[#0B0F19] border-gray-800/80 text-white' : 'bg-white border-gray-200 text-gray-800'} border-b h-20 px-8 flex items-center justify-between transition-colors duration-200`}>
+    <header className={`${isDarkMode ? 'bg-[#0B0F19] border-gray-800/80 text-white' : 'bg-white border-gray-200 text-gray-800'} border-b h-16 lg:h-20 px-3 sm:px-8 flex items-center justify-between transition-colors duration-200`}>
 
       <div className="flex items-center gap-3">
+      <button
+    onClick={onMenuClick}
+    className="lg:hidden p-2 rounded-xl border border-gray-700 text-gray-300 cursor-pointer"> ☰</button>
         <div className={`inline-block  ${isDarkMode ? 'bg-white' : 'bg-transparent'
           }`}>
           <img
@@ -43,7 +46,7 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
         </div>
 
 
-        <div>
+        <div className="hidden sm:block">
           <h2 className={`text-lg font-bold tracking-wide ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Koda Dashboard</h2>
           <p className="text-xs text-gray-400">E-Commerce Admin Panel</p>
         </div>
@@ -51,7 +54,7 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
       </div>
 
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* زر الإشعارات */}
         <button className={`p-2.5 rounded-xl border cursor-pointer transition-colors relative flex items-center justify-center ${isDarkMode ? 'bg-[#111827] border-gray-800 text-gray-300 hover:bg-gray-800' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor" className="w-5 h-5">
@@ -76,7 +79,7 @@ export default function Topbar({ isDarkMode, toggleTheme }) {
           )}
         </button>
 
-        <div className={`flex items-center gap-3 px-3 py-1.5 cursor-pointer rounded-2xl border ${isDarkMode ? 'bg-[#111827] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+        <div className={`hidden sm:flex items-center gap-3 px-3 py-1.5 cursor-pointer rounded-2xl border ${isDarkMode ? 'bg-[#111827] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
           <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-700 to-cyan-400 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/30">
             {avatarInitial}
           </div>
