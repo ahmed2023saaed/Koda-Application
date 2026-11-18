@@ -89,16 +89,18 @@ export default function Sidebar({ isDarkMode, open, onClose }) {
 
   return (
     <>
-    {open && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onClose} />}
+    {open && <div className="fixed top-16 inset-x-0 bottom-0 z-[55] bg-black/20 lg:hidden" onClick={onClose} />}
     <aside
-      className={`fixed inset-y-0 left-0 z-50 w-72 min-h-screen flex flex-col transition-transform duration-300 lg:static lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"} ${
-        isDarkMode
-          ? "bg-[#050817] border-gray-800/60 text-white"
-          : "bg-white border-gray-200 text-gray-900"
-      }`}
-    >
+  className={`fixed top-16 bottom-0 left-0 z-[60] w-72 flex flex-col border-r transition-transform duration-300 lg:static lg:z-auto lg:translate-x-0 lg:min-h-screen ${
+    open ? "translate-x-0" : "-translate-x-full"
+  } ${
+    isDarkMode
+      ? "bg-[#050817]/70 backdrop-blur-[2px] lg:bg-[#050817] lg:backdrop-blur-none border-gray-800/60 text-white"
+      : "bg-white/70 backdrop-blur-[2px] lg:bg-white lg:backdrop-blur-none border-gray-200 text-gray-900"
+  }`}
+>
       {/* Header */}
-      <div className="px-3.5 pt-3.5 pb-1">
+      <div className="hidden lg:block px-3.5 pt-3.5 pb-1">
         <span className="block text-[10px] tracking-[0.3em] text-cyan-400 font-bold uppercase">
           COMMERCE
         </span>
