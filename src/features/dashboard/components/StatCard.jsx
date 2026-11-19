@@ -15,14 +15,12 @@ function StatCard({ label, value, hint, icon, tone = "slate", index = 0 }) {
   const gradient = TONES[tone] ?? TONES.slate;
   const [show, setShow] = useState(false);
 
-  // حركة الدخول: الكارت بيطلع من تحت واحد ورا التاني
   useEffect(() => {
     const id = setTimeout(() => setShow(true), index * 80);
     return () => clearTimeout(id);
   }, [index]);
 
   return (
-    // الغلاف ده للدخول بس، والـ article جواه للـ hover (عشان الحركتين ميتعارضوش)
     <div
       className={`transition-all duration-500 ${
         show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"

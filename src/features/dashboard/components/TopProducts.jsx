@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formatMoney } from "../data/mockDashboard";
+import { formatMoney } from "../utils/formatMoney";
 import useDashTheme from "../hooks/useDashTheme";
 
 function ProductImage({ src, alt, boxClass }) {

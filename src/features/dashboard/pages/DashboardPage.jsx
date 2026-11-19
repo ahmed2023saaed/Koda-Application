@@ -3,7 +3,7 @@ import OrderStatusPanel from "../components/OrderStatusPanel";
 import TopProducts from "../components/TopProducts";
 import RecentOrders from "../components/RecentOrders";
 import Icon from "../components/Icon";
-import { formatMoney } from "../data/mockDashboard";
+import { formatMoney } from "../utils/formatMoney";
 import useDashboard from "../hooks/useDashboard";
 import useDashTheme from "../hooks/useDashTheme";
 
