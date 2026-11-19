@@ -4,7 +4,7 @@ import { Tag, FolderTree, Star } from "lucide-react";
 
 export default function ProductDetailsInfo({ product }) {
     return (
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700 dark:bg-slate-900">
 
             {/* Overview */}
             <div className="mb-6 rounded-xl bg-gray-50 p-5 dark:bg-slate-800">
@@ -12,7 +12,7 @@ export default function ProductDetailsInfo({ product }) {
                     Overview
                 </p>
 
-                <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <h3 className="mb-3 text-xl font-bold text-gray-900 sm:text-2xl dark:text-gray-100">
                     {product.name || "N/A"}
                 </h3>
 

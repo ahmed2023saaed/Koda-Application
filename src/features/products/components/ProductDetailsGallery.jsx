@@ -26,7 +26,7 @@ export default function ProductDetailsGallery({ product }) {
             {/* Main Image Preview */}
             <div>
                 {images.length > 0 ? (
-                    <div className="h-96 w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-slate-800">
+                    <div className="h-64 w-full overflow-hidden rounded-2xl bg-gray-100 sm:h-80 xl:h-96 dark:bg-slate-800">
                         <img
                             src={images[selectedImageIndex]?.url}
                             alt={`${product.name} - selected image`}
@@ -49,7 +49,7 @@ export default function ProductDetailsGallery({ product }) {
                                 key={image.public_id || image.url || index}
                                 type="button"
                                 onClick={() => setSelectedImageIndex(index)}
-                                className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition ${
+                                className={`h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 transition sm:h-20 sm:w-20 ${
                                     selectedImageIndex === index
                                         ? "border-blue-600 dark:border-blue-400"
                                         : "border-gray-200 hover:border-gray-400 dark:border-slate-700 dark:hover:border-slate-500"

@@ -98,19 +98,17 @@ export default function ProductCard({ product, onDelete, onQuickEdit }) {
 
         {/* Divider */}
         <div className="mt-auto mb-5 border-t border-gray-200 dark:border-slate-700" />
-
-
         {/* Product Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex w-full flex-wrap items-center gap-2">
 
-          {/* View, Edit and Quick Edit — Left Side */}
-          <div className="flex items-center gap-1.5">
+          {/* Main buttons — always stay together */}
+          <div className="flex shrink-0 items-center gap-1.5">
 
             {/* View */}
             <button
               type="button"
               onClick={() => navigate(`/products/view/${product._id}`)}
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-gray-100 px-3 py-2 text-xs font-medium text-gray-700 transition-all duration-300 hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-sky-700 dark:hover:bg-sky-950/40 dark:hover:text-sky-300"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-gray-200 bg-gray-100 px-2 py-2 text-[11px] font-medium text-gray-700 transition-all duration-300 hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 sm:px-3 sm:text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-sky-700 dark:hover:bg-sky-950/40 dark:hover:text-sky-300"
             >
               <Eye size={16} />
               View
@@ -120,8 +118,7 @@ export default function ProductCard({ product, onDelete, onQuickEdit }) {
             <button
               type="button"
               onClick={() => navigate(`/products/edit/${product._id}`)}
-
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-gray-100 px-3 py-2 text-xs font-medium text-gray-700 transition-all duration-300 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-indigo-700 dark:hover:bg-indigo-950/40 dark:hover:text-indigo-300"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-gray-200 bg-gray-100 px-2 py-2 text-[11px] font-medium text-gray-700 transition-all duration-300 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 sm:px-3 sm:text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-indigo-700 dark:hover:bg-indigo-950/40 dark:hover:text-indigo-300"
             >
               <Pencil size={16} />
               Edit
@@ -131,7 +128,7 @@ export default function ProductCard({ product, onDelete, onQuickEdit }) {
             <button
               type="button"
               onClick={() => onQuickEdit(product)}
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-gray-100 px-3 py-2 text-xs font-medium text-gray-700 transition-all duration-300 hover:border-amber-200 hover:bg-amber-50 hover:text-amber-700 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-amber-700 dark:hover:bg-amber-950/40 dark:hover:text-amber-300"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-gray-200 bg-gray-100 px-2 py-2 text-[11px] font-medium text-gray-700 transition-all duration-300 hover:border-amber-200 hover:bg-amber-50 hover:text-amber-700 sm:px-3 sm:text-xs dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-amber-700 dark:hover:bg-amber-950/40 dark:hover:text-amber-300"
             >
               <SlidersHorizontal size={16} />
               Quick Edit
@@ -139,17 +136,20 @@ export default function ProductCard({ product, onDelete, onQuickEdit }) {
 
           </div>
 
-          {/* Delete — Right Side */}
+          {/* Delete — always pushed to the right */}
           <button
             type="button"
             onClick={() => onDelete(product)}
-            className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-red-200 bg-transparent px-3 py-2 text-xs font-medium text-red-700 transition-all duration-300 hover:border-red-300 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:border-red-600 dark:hover:bg-red-950/40"
+            className="ml-auto inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-red-200 bg-transparent px-2 py-2 text-[11px] font-medium text-red-700 transition-all duration-300 hover:border-red-300 hover:bg-red-50 sm:px-3 sm:text-xs dark:border-red-800 dark:text-red-400 dark:hover:border-red-600 dark:hover:bg-red-950/40"
           >
             <Trash2 size={16} />
             Delete
           </button>
 
         </div>
+
+
+
 
 
 

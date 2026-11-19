@@ -54,7 +54,7 @@ export default function ProductStats({ products, loading }) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
@@ -72,11 +72,11 @@ export default function ProductStats({ products, loading }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
       {stats.map(({ label, value, Icon, iconColor, iconBg }) => (
         <div
           key={label}
-          className="mx-1 flex min-h-[150px] flex-col items-start justify-start gap-2 rounded-3xl border border-gray-200 bg-white p-3 text-left shadow-sm dark:border-slate-700 dark:bg-slate-900"
+          className="mx-0 flex min-h-[135px] flex-col items-start justify-start gap-2 rounded-3xl border border-gray-200 bg-white p-3 text-left shadow-sm sm:mx-1 sm:min-h-[150px] dark:border-slate-700 dark:bg-slate-900"
         >
           {/* Icon */}
           <div className={`rounded-xl p-3 ${iconBg} ${iconColor}`}>
@@ -84,12 +84,12 @@ export default function ProductStats({ products, loading }) {
           </div>
 
           {/* Actual Number */}
-          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <p className="text-xl font-bold text-gray-900 sm:text-2xl dark:text-gray-100">
             {value}
           </p>
 
           {/* Label */}
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <p className="text-xs font-medium text-gray-500 sm:text-sm dark:text-gray-400">
             {label}
           </p>
         </div>

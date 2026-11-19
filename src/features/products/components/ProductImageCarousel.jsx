@@ -37,7 +37,7 @@ export default function ProductImageCarousel({ product }) {
 
   if (images.length === 0) {
     return (
-      <div className="mb-4 flex h-40 items-center justify-center rounded-lg bg-gray-100 text-gray-400 dark:bg-slate-800 dark:text-gray-500">
+      <div className="mb-4 flex h-36 items-center justify-center rounded-lg bg-gray-100 text-gray-400 sm:h-40 dark:bg-slate-800 dark:text-gray-500">
         No Image
       </div>
     );
@@ -84,7 +84,7 @@ export default function ProductImageCarousel({ product }) {
               alt={`${product.name || "Product"} - image ${index + 1}`}
               loading="eager"
               decoding="async"
-              className="h-56 w-full bg-gray-100 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 dark:bg-slate-800"
+              className="h-48 w-full bg-gray-100 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 sm:h-56 dark:bg-slate-800"
             />
           </div>
         ))}
@@ -112,9 +112,9 @@ export default function ProductImageCarousel({ product }) {
           </button>
 
           {/* Image counter */}
-          <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-1 text-xs text-white">
+          {/* <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-1 text-xs text-white">
             {currentIndex + 1} / {images.length}
-          </span>
+          </span> */}
         </>
       )}
     </div>

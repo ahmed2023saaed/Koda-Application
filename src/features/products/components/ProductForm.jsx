@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { Layers, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -60,7 +58,7 @@ export default function ProductForm({
         <form
             id={formId}
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+            className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700 dark:bg-slate-900"
         >
             <div className={compact ? "space-y-3" : "space-y-5"}>
 

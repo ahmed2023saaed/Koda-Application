@@ -19,28 +19,28 @@ export default function ProductDetailsSkeleton() {
             </div>
 
             {/* Main Content Skeleton */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
                 {/* Gallery Skeleton */}
                 <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-                    <div className="h-96 w-full rounded-2xl bg-gray-200 dark:bg-slate-800" />
+                    <div className="h-64 w-full rounded-2xl bg-gray-200 sm:h-80 xl:h-96 dark:bg-slate-800" />
 
-                    <div className="mt-4 flex gap-3">
+                    <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
                         {[1, 2, 3, 4].map((item) => (
                             <div
                                 key={item}
-                                className="h-20 w-20 shrink-0 rounded-lg bg-gray-200 dark:bg-slate-700"
+                                className="h-16 w-16 shrink-0 rounded-lg bg-gray-200 sm:h-20 sm:w-20 dark:bg-slate-700"
                             />
                         ))}
                     </div>
 
                     <div className="mt-6 border-t border-gray-200 pt-5 dark:border-slate-700">
-                        <div className="h-72 w-full rounded-xl bg-gray-200 dark:bg-slate-800" />
+                        <div className="h-56 w-full rounded-xl bg-gray-200 sm:h-64 xl:h-72 dark:bg-slate-800" />
                     </div>
                 </div>
 
                 {/* Product Information Skeleton */}
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+                <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700 dark:bg-slate-900">
 
                     {/* Overview */}
                     <div className="mb-6 space-y-4 rounded-xl bg-gray-100 p-5 dark:bg-slate-800">
@@ -52,7 +52,7 @@ export default function ProductDetailsSkeleton() {
                     </div>
 
                     {/* Price and Discount */}
-                    <div className="mb-6 grid grid-cols-2 gap-4">
+                    <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         {[1, 2].map((item) => (
                             <div
                                 key={item}
@@ -65,7 +65,7 @@ export default function ProductDetailsSkeleton() {
                     </div>
 
                     {/* Stock and SKU */}
-                    <div className="mb-6 grid grid-cols-2 gap-4">
+                    <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         {[1, 2].map((item) => (
                             <div
                                 key={item}
