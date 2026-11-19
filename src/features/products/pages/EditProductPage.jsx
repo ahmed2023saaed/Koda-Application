@@ -163,7 +163,7 @@ export default function EditProductPage() {
                         <div className="h-4 w-48 rounded bg-gray-200 dark:bg-slate-700"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
                         {/* Gallery skeleton */}
                         <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-6 animate-pulse dark:border-slate-700 dark:bg-slate-900">
@@ -197,13 +197,6 @@ export default function EditProductPage() {
             </div>
         );
     }
-
-
-
-
-
-
-
 
     if (error) {
         return (
@@ -242,7 +235,7 @@ export default function EditProductPage() {
 
 
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
                     {/* Product gallery */}
 

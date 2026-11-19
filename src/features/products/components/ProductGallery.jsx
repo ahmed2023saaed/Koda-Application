@@ -11,7 +11,7 @@ export default function ProductGallery({
     uploadAreaClassName = "border-cyan-300 bg-cyan-50/30 hover:border-cyan-500 hover:bg-cyan-100/60 hover:shadow-[inset_0_0_24px_rgba(6,182,212,0.18)] dark:border-cyan-500/40 dark:bg-slate-800/50 dark:hover:border-cyan-400/70 dark:hover:bg-cyan-500/10 dark:hover:shadow-[inset_0_0_28px_rgba(6,182,212,0.14)]",
 }) {
     return (
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700 dark:bg-slate-900">
 
             {/* Gallery Heading */}
             <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export default function ProductGallery({
             </div>
 
             {/* Image Previews */}
-            <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
                 {images.length === 0 ? (
                     <div className="relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-gray-50 dark:border-slate-700 dark:bg-slate-800">
                         {defaultPlaceholder ? (

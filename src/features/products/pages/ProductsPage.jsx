@@ -21,7 +21,7 @@ export default function ProductsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [productToDelete, setProductToDelete] = useState(null);
+  // const [productToDelete, setProductToDelete] = useState(null);
 
   const [quickEditProduct, setQuickEditProduct] = useState(null);
   const [quickEditImages, setQuickEditImages] = useState([]);
@@ -58,31 +58,39 @@ export default function ProductsPage() {
     }
   }, []);
 
-  async function handleConfirmDelete() {
+
+  async function handleConfirmDelete(product) {
     if (!isAdmin) {
       toast.error("Admin account access only.");
       return;
     }
-    if (!productToDelete) return;
+
+    if (!product) return;
+
+    // Native browser confirmation
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${product.name}"? This action cannot be undone.`
+    );
+
+    // Stop if the user clicks Cancel
+    if (!confirmed) return;
 
     try {
-      await deleteProduct(productToDelete._id);
+      await deleteProduct(product._id);
 
       setProducts((prev) =>
-        prev.filter((product) => product._id !== productToDelete._id)
+        prev.filter((item) => item._id !== product._id)
       );
 
       setTotalProducts((prev) => Math.max(0, prev - 1));
 
       toast.success("Product has been deleted.");
 
-      setProductToDelete(null);
     } catch (error) {
       const status = error.response?.status;
 
       if (status === 401 || status === 403) {
         toast.error("Admin accounts only can delete products.");
-        setProductToDelete(null);
       } else {
         toast.error(
           error.response?.data?.message || "Failed to delete product."
@@ -90,6 +98,40 @@ export default function ProductsPage() {
       }
     }
   }
+
+
+  // async function handleConfirmDelete() {
+  //   if (!isAdmin) {
+  //     toast.error("Admin account access only.");
+  //     return;
+  //   }
+  //   if (!productToDelete) return;
+
+  //   try {
+  //     await deleteProduct(productToDelete._id);
+
+  //     setProducts((prev) =>
+  //       prev.filter((product) => product._id !== productToDelete._id)
+  //     );
+
+  //     setTotalProducts((prev) => Math.max(0, prev - 1));
+
+  //     toast.success("Product has been deleted.");
+
+  //     setProductToDelete(null);
+  //   } catch (error) {
+  //     const status = error.response?.status;
+
+  //     if (status === 401 || status === 403) {
+  //       toast.error("Admin accounts only can delete products.");
+  //       setProductToDelete(null);
+  //     } else {
+  //       toast.error(
+  //         error.response?.data?.message || "Failed to delete product."
+  //       );
+  //     }
+  //   }
+  // }
 
   function handleSearch(filters) {
     setSearchParams(filters);
@@ -235,69 +277,6 @@ export default function ProductsPage() {
   return (
     <>
 
-
-
-      {/* Delete Confirmation Prompt */}
-      {productToDelete && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-transparent px-4 pt-6">
-
-          <div
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="delete-dialog-title"
-            aria-describedby="delete-dialog-description"
-            className="delete-prompt-enter w-full max-w-md rounded-2xl border border-black/10 bg-white p-6 text-black shadow-2xl dark:border-white/10 dark:bg-slate-950 dark:text-white"
-          >
-
-            {/* Heading */}
-            <h2
-              id="delete-dialog-title"
-              className="text-lg font-bold tracking-tight"
-            >
-              Are you sure?
-            </h2>
-
-            {/* Description */}
-            <p
-              id="delete-dialog-description"
-              className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400"
-            >
-              Do you really want to delete{" "}
-              <span className="font-semibold text-black dark:text-white">
-                {productToDelete.name}
-              </span>
-              ? This action cannot be undone.
-            </p>
-
-            {/* Action Buttons */}
-            <div className="mt-6 flex justify-end gap-3">
-
-              <button
-                type="button"
-                onClick={() => setProductToDelete(null)}
-                className="rounded-xl border border-black bg-white px-5 py-2.5 text-sm font-semibold text-black transition-all duration-200 hover:bg-black hover:text-white dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={handleConfirmDelete}
-                className="rounded-xl bg-black px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
-              >
-                Yes, Delete
-              </button>
-
-            </div>
-          </div>
-        </div>
-      )}
-
-
-
-
-
-
       {/* Full-page Background */}
       <div className="-m-4 min-h-full bg-slate-50 py-4 pl-6 pr-4 dark:bg-slate-950 md:-m-6 md:py-6 md:pl-10 md:pr-6">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-7">
@@ -307,39 +286,40 @@ export default function ProductsPage() {
             {loading ? (
               <BrandLoader message="Products Loading..." />
             ) : (
-              /* Gradient Introduction Card */
               <div className="relative mx-1 flex min-h-[130px] items-center overflow-hidden rounded-3xl border border-cyan-100 bg-gradient-to-br from-white via-cyan-50/60 to-white px-7 py-5 shadow-sm dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 dark:shadow-none">
+
                 {/* Top-right cyan glow */}
                 <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan-200/50 blur-3xl dark:bg-cyan-500/10" />
 
                 {/* Bottom-left violet glow */}
                 <div className="pointer-events-none absolute -bottom-12 left-8 h-44 w-44 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-500/10" />
 
-                <div className="flex w-full flex-col items-center justify-center gap-5 sm:flex-row sm:justify-between">
+                <div className="relative z-10 flex w-full flex-col items-stretch gap-5 xl:flex-row xl:items-center xl:justify-between">
 
                   {/* Title and subtitle */}
                   <div className="relative z-10 flex items-center gap-4">
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-sky-700 dark:bg-slate-800 dark:text-teal-400">
+
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-sky-700 dark:bg-slate-800 dark:text-cyan-300">
                       <Package2 size={36} />
                     </div>
 
-                    <div>
-                      <p className="text-lg tracking-widest font-sm text-blue-900 dark:text-gray-400">
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium tracking-widest text-blue-900 sm:text-lg dark:text-cyan-300">
                         PRODUCT DASHBOARD
                       </p>
 
-                      <h1 className="mt-1 text-4xl font-bold text-black dark:text-gray-100">
+                      <h1 className="mt-1 text-3xl font-bold text-black sm:text-4xl dark:text-white">
                         Products
                       </h1>
                     </div>
+
                   </div>
 
                   {/* Add Product button */}
                   <button
                     type="button"
                     onClick={() => navigate("/products/add")}
-                    className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-300 bg-cyan-500 px-5 py-3 text-base font-bold tracking-wide text-white shadow-md shadow-cyan-200 transition-all duration-300 hover:bg-cyan-400 hover:shadow-cyan-300 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-cyan-300 dark:shadow-none dark:hover:border-cyan-400/50 dark:hover:bg-cyan-500/20 dark:hover:text-cyan-200"
-
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-cyan-300 bg-cyan-500 px-5 py-3 text-base font-bold tracking-wide text-white shadow-md shadow-cyan-200 transition-all duration-300 hover:bg-cyan-400 hover:shadow-cyan-300 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-cyan-300 dark:shadow-none dark:hover:border-cyan-400/50 dark:hover:bg-cyan-500/20 dark:hover:text-cyan-200 xl:w-auto"
                   >
                     <Plus
                       size={20}
@@ -350,6 +330,9 @@ export default function ProductsPage() {
 
                 </div>
               </div>
+
+
+
             )}
 
             {/* Product Statistics */}
@@ -395,7 +378,7 @@ export default function ProductsPage() {
               <>
                 <ProductList
                   products={products}
-                  onDelete={setProductToDelete}
+                  onDelete={handleConfirmDelete}
                   onQuickEdit={handleOpenQuickEdit}
                 />
 

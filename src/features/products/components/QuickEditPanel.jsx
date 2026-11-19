@@ -40,7 +40,7 @@ export default function QuickEditPanel({
                 {/* Scrollable Gallery and Product Form */}
                 <div className="min-h-0 flex-1 overflow-y-auto pr-2">
 
-                    <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                    <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
 
                         {/* Product Gallery */}
                         <div>

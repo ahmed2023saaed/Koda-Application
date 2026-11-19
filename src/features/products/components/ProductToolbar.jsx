@@ -65,10 +65,10 @@ export default function ProductToolbar({ onSearch, loading }) {
     <div className="mx-1 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
 
       {/* Main toolbar */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
 
         {/* Search input */}
-        <div className="relative min-w-[200px] flex-1">
+        <div className="relative w-full min-w-0 flex-1">
           <Search
             size={18}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
@@ -82,17 +82,17 @@ export default function ProductToolbar({ onSearch, loading }) {
             className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-indigo-400 dark:focus:ring-indigo-500/20"
           />
         </div>
-
         {/* Filters button */}
         <button
           type="button"
           onClick={() => setIsFilterOpen((previous) => !previous)}
-          className={`flex items-center gap-2 rounded-lg border px-4 py-3 transition-all duration-300 ${isFilterOpen
-            ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-950/50 dark:text-indigo-300"
-            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100 dark:border-slate-600 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
+          aria-expanded={isFilterOpen}
+          className={`flex h-12 w-full items-center justify-center gap-2 rounded-xl border px-4 text-sm font-semibold transition-all duration-300 sm:w-auto ${isFilterOpen
+              ? "border-cyan-400 bg-cyan-100 text-cyan-700 shadow-[0_0_14px_rgba(6,182,212,0.22)] dark:border-cyan-400 dark:bg-cyan-500/20 dark:text-cyan-300 dark:shadow-[0_0_14px_rgba(6,182,212,0.2)]"
+              : "border-gray-300 bg-white text-gray-700 hover:border-cyan-300 hover:bg-white hover:text-black hover:shadow-[0_0_12px_rgba(6,182,212,0.16)] dark:border-slate-600 dark:bg-slate-800 dark:text-gray-300 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-white dark:hover:shadow-none"
             }`}
         >
-          <SlidersHorizontal size={18} />
+          <SlidersHorizontal size={15} />
           Filters
 
           {isFilterOpen ? (
@@ -102,15 +102,18 @@ export default function ProductToolbar({ onSearch, loading }) {
           )}
         </button>
 
+
+
         {/* Search button */}
         <button
           type="button"
           onClick={handleSearch}
-          className="flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white transition hover:bg-indigo-700"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white transition hover:bg-indigo-700 sm:w-auto"
         >
           <Search size={18} />
           Search
         </button>
+
       </div>
 
       {/* Expandable filters */}
@@ -118,10 +121,11 @@ export default function ProductToolbar({ onSearch, loading }) {
         className={`grid transition-[grid-template-rows] duration-500 ease-in-out ${isFilterOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
       >
-        <div className="overflow-hidden">
+        <div className="min-h-0 overflow-hidden">
           <div className="mt-5 border-t border-gray-200 pt-5 dark:border-slate-700">
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {/* Category and Subcategory */}
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
               {/* Category */}
               <div>
@@ -165,6 +169,7 @@ export default function ProductToolbar({ onSearch, loading }) {
           </div>
         </div>
       </div>
+
     </div>
   );
 }
