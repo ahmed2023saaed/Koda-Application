@@ -39,7 +39,7 @@ export function mapDashboard(d) {
 
     recentOrders: (d.recentOrders ?? []).map((o) => ({
       id: o._id,
-      customer: o.user?.username ?? o.shippingAddress?.fullName ?? "Customer",
+      customer: o.user?.username ?? "Customer",
       product: o.items?.[0]?.name ?? "—",
       date: formatDate(o.createdAt),
       status: o.status,

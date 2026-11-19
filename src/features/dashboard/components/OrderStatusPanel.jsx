@@ -14,22 +14,20 @@ function OrderStatusPanel({ counts }) {
 
   return (
     <section className={`rounded-3xl border p-6 ${th.panel}`}>
-      <div className="mb-4 flex items-start justify-between gap-3">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className={`mb-2 text-xs uppercase tracking-[0.3em] ${th.eyebrow}`}>Order Status</p>
-          <h2 className={`text-xl font-semibold ${th.title}`}>Live fulfillment breakdown</h2>
+          <p className={`text-sm uppercase tracking-[0.35em] ${th.eyebrow}`}>Order status</p>
+          <h3 className={`mt-2 text-xl font-semibold ${th.title}`}>Live fulfillment breakdown</h3>
         </div>
-        <span className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs ${th.greenPill}`}>
-          Updated from API
-        </span>
+        <span className={`rounded-full px-3 py-1 text-xs ${th.greenPill}`}>Updated from API</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {STATUSES.map((s) => (
-          <div key={s.key} className={`rounded-2xl border px-5 py-4 ${th.status[s.key]}`}>
-            <p className="text-xs uppercase tracking-[0.2em]">{s.label}</p>
-            <p className="mt-3 text-3xl font-bold">{counts[s.key] ?? 0}</p>
-          </div>
+          <article key={s.key} className={`rounded-3xl border p-4 ${th.status[s.key]}`}>
+            <p className="text-sm uppercase tracking-[0.25em]">{s.label}</p>
+            <p className="mt-3 text-3xl font-semibold">{counts[s.key] ?? 0}</p>
+          </article>
         ))}
       </div>
     </section>
