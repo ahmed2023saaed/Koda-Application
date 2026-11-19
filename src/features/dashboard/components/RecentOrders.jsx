@@ -6,37 +6,36 @@ function RecentOrders({ orders }) {
 
   return (
     <section className={`rounded-3xl border p-6 ${th.panel}`}>
-      <div className="flex items-start justify-between gap-3">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className={`mb-2 text-xs uppercase tracking-[0.3em] ${th.eyebrow}`}>Recent Orders</p>
-          <h2 className={`text-xl font-semibold ${th.title}`}>Latest customer activity</h2>
+          <p className={`text-sm uppercase tracking-[0.35em] ${th.eyebrow}`}>Recent orders</p>
+          <h3 className={`mt-2 text-xl font-semibold ${th.title}`}>Latest customer activity</h3>
         </div>
-        <span className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs ${th.cyanPill}`}>
+        <span className={`rounded-full px-3 py-1 text-xs ${th.cyanPill}`}>
           {orders.length} orders
         </span>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="space-y-3">
         {orders.map((o) => (
-          <div
-            key={o.id}
-            className={`flex flex-col justify-between gap-4 rounded-3xl border p-4 transition hover:-translate-y-0.5 sm:flex-row sm:items-center ${th.row}`}
-          >
-            <div>
-              <p className={`text-[15px] font-semibold ${th.strong}`}>{o.customer}</p>
-              <p className={`mt-1 text-xs ${th.muted}`}>
-                {o.product} • {o.date}
-              </p>
+          <article key={o.id} className={`rounded-3xl border p-4 ${th.orderRow}`}>
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className={`text-sm font-semibold ${th.title}`}>{o.customer}</p>
+                <p className={`text-xs ${th.muted}`}>
+                  {o.product} • {o.date}
+                </p>
+              </div>
+              <div className={`flex items-center gap-3 text-sm ${th.muted}`}>
+                <span
+                  className={`rounded-full px-3 py-1 ${th.badge[o.status] ?? th.badgeDefault}`}
+                >
+                  {o.status}
+                </span>
+                <span>{formatMoney(o.total)}</span>
+              </div>
             </div>
-            <div className="flex shrink-0 items-center gap-3.5">
-              <span
-                className={`rounded-full px-3.5 py-1.5 text-sm lowercase ${th.badge[o.status] ?? th.badgeDefault}`}
-              >
-                {o.status}
-              </span>
-              <strong className={th.title}>{formatMoney(o.total)}</strong>
-            </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
